@@ -1,0 +1,13 @@
+---
+import type { Project } from '@/types/project';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<div class="project-details">
+  <p>{project.longDescription}</p>
+</div>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dyermandujano.dev/sitemap-index.xml

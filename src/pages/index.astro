@@ -1,0 +1,40 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import Container from '@/components/common/Container.astro';
+import Button from '@/components/common/Button.astro';
+import Badge from '@/components/common/Badge.astro';
+import { ArrowRight, Sparkles } from 'lucide-astro';
+---
+
+<MainLayout
+  title="Dyer Mandujano | Desarrollo Web & Soluciones Digitales"
+  description="Desarrollo de páginas web profesionales, sistemas a medida y soluciones digitales para emprendedores y empresas en Lima y remoto."
+>
+  <!-- Hero Section Preview - Base de Fase 1 -->
+  <section class="py-20 lg:py-28 bg-gradient-to-b from-white to-brand-bg border-b border-brand-border">
+    <Container class="text-center">
+      <Badge variant="blue" size="md" class="mb-6">
+        <Sparkles class="w-3.5 h-3.5 text-brand-blue" />
+        <span>Fase 1: Arquitectura y Base Configurada</span>
+      </Badge>
+
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-navy tracking-tight max-w-4xl mx-auto leading-tight">
+        Transformo ideas en <span class="text-brand-blue">soluciones digitales</span> para impulsar tu negocio
+      </h1>
+
+      <p class="mt-6 text-lg sm:text-xl text-brand-muted max-w-2xl mx-auto leading-relaxed">
+        Diseño y desarrollo páginas web modernas, sistemas personalizados y soluciones tecnológicas para emprendedores y empresas.
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <Button href="/contacto" variant="primary" size="lg">
+          <span>Solicitar una cotización</span>
+          <ArrowRight class="w-5 h-5 ml-1" />
+        </Button>
+        <Button href="/proyectos" variant="outline" size="lg">
+          <span>Explorar proyectos</span>
+        </Button>
+      </div>
+    </Container>
+  </section>
+</MainLayout>

@@ -1,0 +1,54 @@
+---
+interface Props {
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+  target?: string;
+  rel?: string;
+  id?: string;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  href,
+  type = 'button',
+  class: className = '',
+  target,
+  rel,
+  id,
+} = Astro.props;
+
+const baseStyles =
+  'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
+
+const variantStyles = {
+  primary: 'bg-brand-blue text-white hover:bg-brand-blue-hover focus:ring-brand-blue shadow-sm active:translate-y-0.5',
+  secondary: 'bg-brand-navy text-white hover:bg-slate-800 focus:ring-brand-navy shadow-sm active:translate-y-0.5',
+  outline:
+    'bg-white border border-brand-border text-brand-text hover:bg-slate-50 hover:border-slate-300 focus:ring-brand-blue active:translate-y-0.5',
+  ghost: 'text-brand-text hover:bg-slate-100 focus:ring-brand-blue',
+};
+
+const sizeStyles = {
+  sm: 'px-3.5 py-1.5 text-xs sm:text-sm gap-1.5',
+  md: 'px-5 py-2.5 text-sm sm:text-base gap-2',
+  lg: 'px-6 py-3.5 text-base sm:text-lg gap-2.5 font-semibold',
+};
+
+const computedClass = `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`;
+---
+
+{
+  href ? (
+    <a href={href} class={computedClass} target={target} rel={rel} id={id}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class={computedClass} id={id}>
+      <slot />
+    </button>
+  )
+}

@@ -1,0 +1,106 @@
+---
+import { NAV_ITEMS } from '@/data/navigation';
+import Button from '@/components/common/Button.astro';
+import { X, ArrowRight } from 'lucide-astro';
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+---
+
+<div
+  id="mobile-menu-drawer"
+  class="fixed inset-0 z-50 transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden"
+  aria-modal="true"
+  role="dialog"
+  aria-hidden="true"
+>
+  <!-- Backdrop -->
+  <div id="mobile-menu-backdrop" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
+
+  <!-- Panel -->
+  <div class="fixed inset-y-0 right-0 w-full max-w-xs bg-white shadow-2xl p-6 flex flex-col justify-between overflow-y-auto">
+    <div>
+      <div class="flex items-center justify-between pb-6 border-b border-brand-border">
+        <a href="/" class="flex items-center gap-2 group">
+          <span class="flex items-center justify-center w-9 h-9 rounded-lg bg-brand-navy text-white font-bold text-sm tracking-wider">
+            DM
+          </span>
+          <span class="font-bold text-brand-navy text-base">Dyer Mandujano</span>
+        </a>
+        <button
+          id="close-menu-btn"
+          type="button"
+          class="p-2 rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-brand-blue"
+          aria-label="Cerrar menú"
+        >
+          <X class="w-6 h-6" />
+        </button>
+      </div>
+
+      <!-- Links -->
+      <nav class="mt-6 flex flex-col space-y-2">
+        {
+          NAV_ITEMS.map((item) => {
+            const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+            return (
+              <a
+                href={item.href}
+                class={`px-4 py-3 rounded-lg text-base font-medium transition-colors flex items-center justify-between ${
+                  isActive
+                    ? 'bg-blue-50 text-brand-blue font-semibold'
+                    : 'text-slate-700 hover:bg-slate-50 hover:text-brand-navy'
+                }`}
+              >
+                <span>{item.title}</span>
+                {isActive && <span class="w-1.5 h-1.5 rounded-full bg-brand-blue"></span>}
+              </a>
+            );
+          })
+        }
+      </nav>
+    </div>
+
+    <!-- CTA Button -->
+    <div class="pt-6 border-t border-brand-border">
+      <Button href="/contacto" variant="primary" class="w-full justify-center">
+        <span>Hablemos</span>
+        <ArrowRight class="w-4 h-4 ml-2" />
+      </Button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const openBtn = document.getElementById('open-menu-btn');
+  const closeBtn = document.getElementById('close-menu-btn');
+  const drawer = document.getElementById('mobile-menu-drawer');
+  const backdrop = document.getElementById('mobile-menu-backdrop');
+
+  function openMenu() {
+    if (!drawer || !backdrop) return;
+    drawer.classList.remove('translate-x-full');
+    backdrop.classList.remove('opacity-0');
+    drawer.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('overflow-hidden');
+  }
+
+  function closeMenu() {
+    if (!drawer || !backdrop) return;
+    drawer.classList.add('translate-x-full');
+    backdrop.classList.add('opacity-0');
+    drawer.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('overflow-hidden');
+  }
+
+  openBtn?.addEventListener('click', openMenu);
+  closeBtn?.addEventListener('click', closeMenu);
+  backdrop?.addEventListener('click', closeMenu);
+
+  // Close on ESC
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+</script>

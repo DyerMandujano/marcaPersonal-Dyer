@@ -1,0 +1,35 @@
+---
+import { siteConfig } from '@/config/site';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': `${siteConfig.url}/#person`,
+      name: siteConfig.name,
+      jobTitle: siteConfig.role,
+      description: siteConfig.description,
+      url: siteConfig.url,
+      sameAs: [siteConfig.social.github, siteConfig.social.linkedin],
+    },
+    {
+      '@type': 'ProfessionalService',
+      '@id': `${siteConfig.url}/#service`,
+      name: `${siteConfig.name} - Soluciones Digitales`,
+      url: siteConfig.url,
+      description: siteConfig.description,
+      priceRange: '$$',
+      areaServed: {
+        '@type': 'Country',
+        name: 'Perú',
+      },
+      provider: {
+        '@id': `${siteConfig.url}/#person`,
+      },
+    },
+  ],
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

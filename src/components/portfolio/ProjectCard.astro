@@ -1,0 +1,14 @@
+---
+import type { Project } from '@/types/project';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<article class="p-6 bg-white border border-brand-border rounded-xl shadow-subtle hover:shadow-card-hover transition-all">
+  <h3 class="text-xl font-bold text-brand-navy mb-2">{project.title}</h3>
+  <p class="text-sm text-brand-muted">{project.description}</p>
+</article>

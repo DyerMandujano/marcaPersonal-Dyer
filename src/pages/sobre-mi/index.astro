@@ -1,0 +1,139 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import Container from '@/components/common/Container.astro';
+import SectionTitle from '@/components/common/SectionTitle.astro';
+import Badge from '@/components/common/Badge.astro';
+import { EXPERIENCES, EDUCATION } from '@/data/experience';
+import { SKILL_CATEGORIES } from '@/data/skills';
+import { Briefcase, GraduationCap, CheckCircle2 } from 'lucide-astro';
+---
+
+<MainLayout
+  title="Sobre Mí | Trayectoria, Experiencia y Habilidades"
+  description="Conoce el perfil profesional de Dyer Mandujano: estudiante de Ingeniería de Sistemas Computacionales y desarrollador de soluciones digitales."
+>
+  <section class="py-16 sm:py-20">
+    <Container class="max-w-4xl">
+      <!-- Intro Profile -->
+      <SectionTitle
+        tag="Sobre Mí"
+        title="Detrás de cada solución digital hay una idea que merece hacerse realidad"
+        subtitle="Soy Dyer Mandujano, estudiante de Ingeniería de Sistemas Computacionales y desarrollador de soluciones digitales orientadas a emprendedores y empresas."
+        align="left"
+      />
+
+      <div class="prose max-w-none text-slate-600 mb-16 leading-relaxed space-y-4">
+        <p>
+          Tengo interés y experiencia práctica en desarrollo web, bases de datos, análisis de requerimientos, diseño de interfaces y soluciones tecnológicas orientadas a optimizar la gestión empresarial.
+        </p>
+        <p>
+          Durante mis prácticas preprofesionales en el área de Tecnologías de la Información de ONCOCARE S.A.C., participé activamente en el análisis de requerimientos, diseño de prototipos, desarrollo de consultas SQL, elaboración de dashboards en Power BI, pruebas funcionales y soporte tecnológico.
+        </p>
+        <p>
+          Mi objetivo es ayudar a negocios y profesionales a fortalecer su presencia digital mediante soluciones tecnológicas modernas, sólidas y eficientes.
+        </p>
+      </div>
+
+      <!-- Experiencia Profesional -->
+      <div class="mb-16">
+        <div class="flex items-center gap-3 mb-8">
+          <div class="p-2.5 rounded-lg bg-blue-50 text-brand-blue">
+            <Briefcase class="w-6 h-6" />
+          </div>
+          <div>
+            <h2 class="text-2xl font-bold text-brand-navy">Experiencia Práctica</h2>
+            <p class="text-sm text-brand-muted">Trayectoria en entorno empresarial</p>
+          </div>
+        </div>
+
+        <div class="space-y-8">
+          {
+            EXPERIENCES.map((exp) => (
+              <div class="p-6 bg-white border border-brand-border rounded-xl shadow-subtle">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                  <h3 class="text-xl font-bold text-brand-navy">{exp.company}</h3>
+                  <Badge variant="blue">{exp.type}</Badge>
+                </div>
+                <p class="text-sm font-semibold text-brand-blue mb-4">
+                  {exp.role} • {exp.area}
+                </p>
+                <ul class="space-y-2 text-sm text-slate-600 mb-6">
+                  {exp.responsibilities.map((item) => (
+                    <li class="flex items-start gap-2.5">
+                      <CheckCircle2 class="w-4 h-4 text-brand-blue flex-shrink-0 mt-1" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div class="flex flex-wrap gap-1.5 pt-4 border-t border-brand-border">
+                  {exp.technologies.map((tech) => (
+                    <span class="px-2.5 py-1 text-xs bg-slate-100 text-slate-700 rounded-md font-medium">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Formación Académica -->
+      <div class="mb-16">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="p-2.5 rounded-lg bg-cyan-50 text-brand-cyan">
+            <GraduationCap class="w-6 h-6" />
+          </div>
+          <div>
+            <h2 class="text-2xl font-bold text-brand-navy">Formación Académica</h2>
+            <p class="text-sm text-brand-muted">Educación universitaria</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4">
+          {
+            EDUCATION.map((edu) => (
+              <div class="p-6 bg-white border border-brand-border rounded-xl shadow-subtle">
+                <div class="flex items-center justify-between mb-2">
+                  <h3 class="text-lg font-bold text-brand-navy">{edu.degree}</h3>
+                  <Badge variant="cyan">{edu.status}</Badge>
+                </div>
+                <p class="text-sm text-brand-muted mb-2">{edu.institution}</p>
+                {edu.details && <p class="text-sm text-slate-600">{edu.details}</p>}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Habilidades -->
+      <div>
+        <h2 class="text-2xl font-bold text-brand-navy mb-6">Habilidades & Tecnologías</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {
+            SKILL_CATEGORIES.map((cat) => (
+              <div class="p-5 bg-white border border-brand-border rounded-xl">
+                <h3 class="font-bold text-brand-navy text-base mb-1">{cat.title}</h3>
+                <p class="text-xs text-brand-muted mb-3">{cat.description}</p>
+                <div class="flex flex-wrap gap-1.5">
+                  {cat.skills.map((skill) => (
+                    <span
+                      class={`px-2.5 py-1 text-xs rounded-md font-medium ${
+                        skill.isRecent
+                          ? 'bg-blue-100 text-brand-blue border border-blue-200'
+                          : 'bg-slate-100 text-slate-700'
+                      }`}
+                    >
+                      {skill.name}
+                      {skill.isRecent && ' (Proyecto actual)'}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </Container>
+  </section>
+</MainLayout>

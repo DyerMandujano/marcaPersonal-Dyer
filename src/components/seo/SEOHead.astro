@@ -1,0 +1,59 @@
+---
+import { siteConfig } from '@/config/site';
+import { formatPageTitle, getCanonicalUrl } from '@/utils/seo';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalUrl?: string;
+  type?: 'website' | 'article' | 'profile';
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = siteConfig.description,
+  image = siteConfig.ogImage,
+  canonicalUrl,
+  type = 'website',
+  noindex = false,
+} = Astro.props;
+
+const pageTitle = formatPageTitle(title);
+const canonical = canonicalUrl || getCanonicalUrl(Astro.url.pathname);
+const ogImageUrl = image.startsWith('http') ? image : `${siteConfig.url}${image}`;
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta name="generator" content={Astro.generator} />
+<meta name="theme-color" content="#101828" />
+
+<!-- Primary Meta Tags -->
+<title>{pageTitle}</title>
+<meta name="title" content={pageTitle} />
+<meta name="description" content={description} />
+<meta name="author" content={siteConfig.author} />
+<link rel="canonical" href={canonical} />
+
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonical} />
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:site_name" content={siteConfig.name} />
+<meta property="og:locale" content="es_PE" />
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonical} />
+<meta name="twitter:title" content={pageTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageUrl} />

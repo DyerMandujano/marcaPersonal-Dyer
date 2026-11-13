@@ -1,0 +1,117 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import Container from '@/components/common/Container.astro';
+import Badge from '@/components/common/Badge.astro';
+import Button from '@/components/common/Button.astro';
+import { PROJECTS } from '@/data/projects';
+import type { Project } from '@/types/project';
+import { ArrowLeft, Github, ExternalLink, CheckCircle2 } from 'lucide-astro';
+
+export async function getStaticPaths() {
+  return PROJECTS.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<MainLayout
+  title={`${project.title} | Portafolio`}
+  description={project.description}
+>
+  <article class="py-16 sm:py-20">
+    <Container class="max-w-4xl">
+      <!-- Back button -->
+      <a
+        href="/proyectos"
+        class="inline-flex items-center gap-2 text-sm text-brand-muted hover:text-brand-blue mb-8 transition-colors"
+      >
+        <ArrowLeft class="w-4 h-4" />
+        <span>Volver a proyectos</span>
+      </a>
+
+      <!-- Header -->
+      <div class="mb-8">
+        <div class="flex flex-wrap items-center gap-2 mb-4">
+          <Badge variant="blue">{project.category}</Badge>
+          {project.status === 'en-desarrollo' && <Badge variant="neutral">En desarrollo</Badge>}
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-bold text-brand-navy tracking-tight">
+          {project.title}
+        </h1>
+        <p class="mt-4 text-lg text-brand-muted leading-relaxed">
+          {project.description}
+        </p>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="flex flex-wrap items-center gap-4 py-4 border-y border-brand-border mb-8">
+        {project.githubUrl && (
+          <Button
+            href={project.githubUrl}
+            variant="outline"
+            size="sm"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Github class="w-4 h-4 mr-2" />
+            <span>Ver repositorio GitHub</span>
+          </Button>
+        )}
+        {project.liveUrl && (
+          <Button
+            href={project.liveUrl}
+            variant="primary"
+            size="sm"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>Ver demo en vivo</span>
+            <ExternalLink class="w-4 h-4 ml-2" />
+          </Button>
+        )}
+      </div>
+
+      <!-- Tech Stack -->
+      <div class="mb-8">
+        <h2 class="text-lg font-semibold text-brand-navy mb-3">Tecnologías utilizadas</h2>
+        <div class="flex flex-wrap gap-2">
+          {project.tags.map((tag) => (
+            <span class="px-3 py-1 text-sm bg-slate-100 text-slate-700 font-medium rounded-lg">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <!-- Overview -->
+      {project.longDescription && (
+        <div class="mb-8">
+          <h2 class="text-lg font-semibold text-brand-navy mb-3">Descripción general</h2>
+          <p class="text-slate-600 leading-relaxed">{project.longDescription}</p>
+        </div>
+      )}
+
+      <!-- Highlights -->
+      {project.highlights && project.highlights.length > 0 && (
+        <div class="mb-12">
+          <h2 class="text-lg font-semibold text-brand-navy mb-4">Características principales</h2>
+          <ul class="space-y-3">
+            {project.highlights.map((highlight) => (
+              <li class="flex items-start gap-3 text-slate-600">
+                <CheckCircle2 class="w-5 h-5 text-brand-blue flex-shrink-0 mt-0.5" />
+                <span>{highlight}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </Container>
+  </article>
+</MainLayout>

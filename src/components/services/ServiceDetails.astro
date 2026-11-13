@@ -1,0 +1,13 @@
+---
+import type { Service } from '@/types/service';
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+---
+
+<div class="service-details">
+  <p>{service.fullDescription}</p>
+</div>

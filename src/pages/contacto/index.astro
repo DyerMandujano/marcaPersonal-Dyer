@@ -1,0 +1,186 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import Container from '@/components/common/Container.astro';
+import SectionTitle from '@/components/common/SectionTitle.astro';
+import Button from '@/components/common/Button.astro';
+import { siteConfig } from '@/config/site';
+import { MessageCircle, Mail, Github, Linkedin, Send } from 'lucide-astro';
+---
+
+<MainLayout
+  title="Contacto | Solicita una Cotización para tu Proyecto"
+  description="Conversemos sobre tu proyecto web o solución digital. Solicita una cotización personalizada o contáctame directamente por WhatsApp o correo."
+>
+  <section class="py-16 sm:py-20">
+    <Container class="max-w-5xl">
+      <SectionTitle
+        tag="Hablemos"
+        title="¿Tienes un proyecto en mente? Hagámoslo realidad"
+        subtitle="Cuéntame qué necesitas y conversemos sobre cómo puedo ayudarte a alcanzar los objetivos de tu negocio."
+      />
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 mt-12">
+        <!-- Canales directos -->
+        <div class="space-y-6">
+          <div class="p-6 bg-white border border-brand-border rounded-xl shadow-subtle space-y-4">
+            <h3 class="font-bold text-brand-navy text-lg">Canales Directos</h3>
+            <p class="text-sm text-brand-muted">
+              Si prefieres una respuesta más rápida, comunícate por cualquiera de estas vías:
+            </p>
+
+            <div class="space-y-3 pt-2">
+              <a
+                href={siteConfig.social.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-3 p-3 rounded-lg bg-emerald-50 text-emerald-800 hover:bg-emerald-100 transition-colors text-sm font-medium"
+              >
+                <MessageCircle class="w-5 h-5 text-emerald-600 flex-shrink-0" />
+                <span>WhatsApp directo</span>
+              </a>
+
+              <a
+                href={`mailto:${siteConfig.social.email}`}
+                class="flex items-center gap-3 p-3 rounded-lg bg-slate-50 text-slate-800 hover:bg-slate-100 transition-colors text-sm font-medium"
+              >
+                <Mail class="w-5 h-5 text-brand-blue flex-shrink-0" />
+                <span class="truncate">{siteConfig.social.email}</span>
+              </a>
+
+              <a
+                href={siteConfig.social.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-3 p-3 rounded-lg bg-slate-50 text-slate-800 hover:bg-slate-100 transition-colors text-sm font-medium"
+              >
+                <Linkedin class="w-5 h-5 text-sky-700 flex-shrink-0" />
+                <span>LinkedIn</span>
+              </a>
+
+              <a
+                href={siteConfig.social.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-3 p-3 rounded-lg bg-slate-50 text-slate-800 hover:bg-slate-100 transition-colors text-sm font-medium"
+              >
+                <Github class="w-5 h-5 text-slate-800 flex-shrink-0" />
+                <span>GitHub</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulario de contacto -->
+        <div class="lg:col-span-2">
+          <div class="p-8 bg-white border border-brand-border rounded-xl shadow-subtle">
+            <form id="contact-form" class="space-y-5">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label for="name" class="block text-sm font-medium text-brand-navy mb-1.5">
+                    Nombre completo <span class="text-rose-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    placeholder="Ej. Juan Pérez"
+                    class="w-full px-4 py-2.5 rounded-lg border border-brand-border focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none text-sm transition-all"
+                  />
+                </div>
+                <div>
+                  <label for="business" class="block text-sm font-medium text-brand-navy mb-1.5">
+                    Nombre del negocio o empresa
+                  </label>
+                  <input
+                    type="text"
+                    id="business"
+                    name="business"
+                    placeholder="Ej. Mi Emprendimiento"
+                    class="w-full px-4 py-2.5 rounded-lg border border-brand-border focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none text-sm transition-all"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label for="email" class="block text-sm font-medium text-brand-navy mb-1.5">
+                  Correo electrónico <span class="text-rose-500">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  placeholder="tu@correo.com"
+                  class="w-full px-4 py-2.5 rounded-lg border border-brand-border focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none text-sm transition-all"
+                />
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label for="service" class="block text-sm font-medium text-brand-navy mb-1.5">
+                    Tipo de servicio <span class="text-rose-500">*</span>
+                  </label>
+                  <select
+                    id="service"
+                    name="service"
+                    required
+                    class="w-full px-4 py-2.5 rounded-lg border border-brand-border focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none text-sm transition-all bg-white"
+                  >
+                    <option value="">Selecciona un servicio</option>
+                    <option value="desarrollo-web">Desarrollo de páginas web</option>
+                    <option value="landing-page">Landing Page</option>
+                    <option value="sistema-web">Sistema web personalizado</option>
+                    <option value="ecommerce">Tienda virtual / Catálogo digital</option>
+                    <option value="bi-analytics">Inteligencia de negocios (BI)</option>
+                    <option value="mantenimiento">Mantenimiento web</option>
+                    <option value="otro">Otro requerimiento</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="budget" class="block text-sm font-medium text-brand-navy mb-1.5">
+                    Presupuesto aproximado
+                  </label>
+                  <select
+                    id="budget"
+                    name="budget"
+                    class="w-full px-4 py-2.5 rounded-lg border border-brand-border focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none text-sm transition-all bg-white"
+                  >
+                    <option value="">A convenir / Por definir</option>
+                    <option value="menos-1000">Menos de S/ 1,000</option>
+                    <option value="1000-2500">S/ 1,000 - S/ 2,500</option>
+                    <option value="2500-5000">S/ 2,500 - S/ 5,000</option>
+                    <option value="mas-5000">Más de S/ 5,000</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label for="message" class="block text-sm font-medium text-brand-navy mb-1.5">
+                  Descripción del proyecto <span class="text-rose-500">*</span>
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  required
+                  placeholder="Cuéntame sobre tu objetivo, funciones esperadas o dudas iniciales..."
+                  class="w-full px-4 py-2.5 rounded-lg border border-brand-border focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none text-sm transition-all resize-none"
+                ></textarea>
+              </div>
+
+              <Button type="submit" variant="primary" class="w-full py-3">
+                <span>Enviar solicitud de cotización</span>
+                <Send class="w-4 h-4 ml-2" />
+              </Button>
+
+              <p class="text-xs text-brand-muted text-center pt-2">
+                Respondo habitualmente en menos de 24 horas hábiles. Tus datos no serán compartidos.
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+</MainLayout>

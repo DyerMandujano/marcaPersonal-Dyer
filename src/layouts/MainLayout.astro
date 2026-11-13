@@ -1,0 +1,55 @@
+---
+import '@/styles/global.css';
+import SEOHead from '@/components/seo/SEOHead.astro';
+import SchemaOrg from '@/components/seo/SchemaOrg.astro';
+import Navbar from '@/components/layout/Navbar.astro';
+import Footer from '@/components/layout/Footer.astro';
+import WhatsAppButton from '@/components/contact/WhatsAppButton.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalUrl?: string;
+  noindex?: boolean;
+}
+
+const { title, description, image, canonicalUrl, noindex } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <SEOHead
+      title={title}
+      description={description}
+      image={image}
+      canonicalUrl={canonicalUrl}
+      noindex={noindex}
+    />
+    <SchemaOrg />
+  </head>
+  <body class="min-h-screen flex flex-col bg-brand-bg text-brand-text font-sans antialiased selection:bg-brand-blue selection:text-white">
+    <!-- Skip to main content link for accessibility -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 px-4 py-2 bg-brand-blue text-white rounded-lg font-medium shadow-lg outline-none ring-2 ring-white"
+    >
+      Saltar al contenido principal
+    </a>
+
+    <!-- Navbar -->
+    <Navbar />
+
+    <!-- Main Content Slot -->
+    <main id="main-content" class="flex-grow">
+      <slot />
+    </main>
+
+    <!-- Floating WhatsApp CTA -->
+    <WhatsAppButton />
+
+    <!-- Footer -->
+    <Footer />
+  </body>
+</html>
