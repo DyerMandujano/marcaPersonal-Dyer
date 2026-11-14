@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <rect width="800" height="450" rx="16" fill="#0B1329"/>
+  <defs>
+    <linearGradient id="bi-grad" x1="0" y1="0" x2="800" y2="450" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#1E1B4B"/>
+    </linearGradient>
+    <linearGradient id="bar-grad" x1="0" y1="1" x2="0" y2="0">
+      <stop stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bi-grad)"/>
+
+  <!-- Browser window frame -->
+  <rect x="70" y="55" width="660" height="340" rx="12" fill="#0F172A" stroke="#1E293B" stroke-width="1.5"/>
+  <circle cx="95" cy="78" r="5" fill="#EF4444"/>
+  <circle cx="112" cy="78" r="5" fill="#F59E0B"/>
+  <circle cx="129" cy="78" r="5" fill="#10B981"/>
+  <rect x="155" y="70" width="300" height="16" rx="8" fill="#1E293B"/>
+  <text x="170" y="82" font-family="monospace" font-size="10" fill="#94A3B8">Power BI • Executive Business Intelligence</text>
+
+  <!-- Top KPI Cards -->
+  <rect x="95" y="110" width="130" height="65" rx="6" fill="#1E293B" stroke="#334155"/>
+  <text x="110" y="130" font-family="Inter, sans-serif" font-size="10" fill="#94A3B8">KPI Venta Total</text>
+  <text x="110" y="155" font-family="Inter, sans-serif" font-size="18" font-weight="700" fill="#FFFFFF">+28.4%</text>
+
+  <rect x="240" y="110" width="130" height="65" rx="6" fill="#1E293B" stroke="#334155"/>
+  <text x="255" y="130" font-family="Inter, sans-serif" font-size="10" fill="#94A3B8">Margen Operativo</text>
+  <text x="255" y="155" font-family="Inter, sans-serif" font-size="18" font-weight="700" fill="#06B6D4">42.8%</text>
+
+  <rect x="385" y="110" width="130" height="65" rx="6" fill="#1E293B" stroke="#334155"/>
+  <text x="400" y="130" font-family="Inter, sans-serif" font-size="10" fill="#94A3B8">Transacciones</text>
+  <text x="400" y="155" font-family="Inter, sans-serif" font-size="18" font-weight="700" fill="#FFFFFF">14,250</text>
+
+  <rect x="530" y="110" width="175" height="65" rx="6" fill="#1E293B" stroke="#334155"/>
+  <text x="545" y="130" font-family="Inter, sans-serif" font-size="10" fill="#94A3B8">Cumplimiento Meta</text>
+  <text x="545" y="155" font-family="Inter, sans-serif" font-size="18" font-weight="700" fill="#10B981">98.2%</text>
+
+  <!-- Bar Chart Mockup -->
+  <rect x="95" y="190" width="360" height="180" rx="8" fill="#1E293B" stroke="#334155"/>
+  <text x="115" y="215" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF">Rendimiento Mensual de Ventas</text>
+  <!-- Bars -->
+  <rect x="125" y="300" width="24" height="50" rx="3" fill="#334155"/>
+  <rect x="165" y="280" width="24" height="70" rx="3" fill="#334155"/>
+  <rect x="205" y="260" width="24" height="90" rx="3" fill="#2563EB"/>
+  <rect x="245" y="245" width="24" height="105" rx="3" fill="#2563EB"/>
+  <rect x="285" y="235" width="24" height="115" rx="3" fill="url(#bar-grad)"/>
+  <rect x="325" y="250" width="24" height="100" rx="3" fill="#06B6D4"/>
+  <rect x="365" y="225" width="24" height="125" rx="3" fill="url(#bar-grad)"/>
+  <rect x="405" y="220" width="24" height="130" rx="3" fill="url(#bar-grad)"/>
+
+  <!-- Donut / Segmentation Chart Mockup -->
+  <rect x="470" y="190" width="235" height="180" rx="8" fill="#1E293B" stroke="#334155"/>
+  <text x="490" y="215" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF">Segmentación por Canal</text>
+  <circle cx="585" cy="285" r="50" stroke="#334155" stroke-width="16" fill="none"/>
+  <circle cx="585" cy="285" r="50" stroke="#2563EB" stroke-width="16" stroke-dasharray="140 314" stroke-dashoffset="0" fill="none"/>
+  <circle cx="585" cy="285" r="50" stroke="#06B6D4" stroke-width="16" stroke-dasharray="90 314" stroke-dashoffset="-140" fill="none"/>
+</svg>

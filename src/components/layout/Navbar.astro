@@ -2,29 +2,35 @@
 import { NAV_ITEMS } from '@/data/navigation';
 import Button from '@/components/common/Button.astro';
 import MobileMenu from './MobileMenu.astro';
-import { Menu } from 'lucide-astro';
+import { Menu, ArrowRight } from 'lucide-astro';
 
 const currentPath = Astro.url.pathname;
 ---
 
 <header
   id="main-navbar"
-  class="sticky top-0 z-40 w-full transition-all duration-200 bg-white/90 backdrop-blur-md border-b border-brand-border/80"
+  class="sticky top-0 z-40 w-full transition-all duration-300 bg-white/95 backdrop-blur-md border-b border-brand-border/80 shadow-sm"
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-20">
-      <!-- Logo -->
-      <a href="/" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-brand-blue rounded-lg p-1">
+      <!-- Logo tipográfico DM + Nombre -->
+      <a
+        href="/"
+        class="flex items-center gap-3.5 group focus:outline-none focus:ring-2 focus:ring-brand-blue rounded-xl p-1"
+        aria-label="Dyer Mandujano - Inicio"
+      >
         <span
-          class="flex items-center justify-center w-10 h-10 rounded-xl bg-brand-navy text-white font-bold text-base tracking-wider shadow-sm group-hover:bg-brand-blue transition-colors duration-200"
+          class="flex items-center justify-center w-11 h-11 rounded-xl bg-brand-navy text-white font-extrabold text-base tracking-wider shadow-sm group-hover:bg-brand-blue transition-colors duration-200 border border-slate-700/50"
         >
           DM
         </span>
         <div class="flex flex-col">
-          <span class="font-bold text-brand-navy text-lg leading-tight tracking-tight group-hover:text-brand-blue transition-colors duration-200">
+          <span class="font-extrabold text-brand-navy text-lg sm:text-xl leading-tight tracking-tight group-hover:text-brand-blue transition-colors duration-200">
             Dyer Mandujano
           </span>
-          <span class="text-xs text-brand-muted font-medium">Soluciones Digitales</span>
+          <span class="text-xs text-brand-muted font-medium tracking-wide">
+            Desarrollo Web & Soluciones
+          </span>
         </div>
       </a>
 
@@ -38,10 +44,10 @@ const currentPath = Astro.url.pathname;
             return (
               <a
                 href={item.href}
-                class={`px-4 py-2 rounded-lg text-sm font-medium transition-colors relative ${
+                class={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 relative ${
                   isActive
-                    ? 'text-brand-blue font-semibold bg-blue-50/60'
-                    : 'text-slate-600 hover:text-brand-navy hover:bg-slate-100/60'
+                    ? 'text-brand-blue bg-blue-50/80 shadow-xs'
+                    : 'text-slate-600 hover:text-brand-navy hover:bg-slate-100/70'
                 }`}
                 aria-current={isActive ? 'page' : undefined}
               >
@@ -55,19 +61,20 @@ const currentPath = Astro.url.pathname;
         }
       </nav>
 
-      <!-- CTA & Mobile Toggle -->
+      <!-- Botón destacado: Solicitar cotización & Mobile Hamburger -->
       <div class="flex items-center gap-3">
         <div class="hidden sm:block">
-          <Button href="/contacto" variant="primary" size="sm">
-            <span>Hablemos</span>
+          <Button href="/contacto" variant="primary" size="sm" class="shadow-sm">
+            <span>Solicitar cotización</span>
+            <ArrowRight class="w-4 h-4 ml-1.5" />
           </Button>
         </div>
 
-        <!-- Mobile hamburger button -->
+        <!-- Botón menú móvil -->
         <button
           id="open-menu-btn"
           type="button"
-          class="lg:hidden p-2 rounded-lg text-slate-600 hover:text-brand-navy hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-brand-blue"
+          class="lg:hidden p-2.5 rounded-xl text-slate-700 hover:text-brand-navy hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-brand-blue border border-transparent hover:border-brand-border"
           aria-label="Abrir menú de navegación"
         >
           <Menu class="w-6 h-6" />

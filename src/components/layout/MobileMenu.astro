@@ -18,17 +18,27 @@ const { currentPath } = Astro.props;
   aria-hidden="true"
 >
   <!-- Backdrop -->
-  <div id="mobile-menu-backdrop" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
+  <div
+    id="mobile-menu-backdrop"
+    class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm opacity-0 transition-opacity duration-300"
+  ></div>
 
   <!-- Panel -->
-  <div class="fixed inset-y-0 right-0 w-full max-w-xs bg-white shadow-2xl p-6 flex flex-col justify-between overflow-y-auto">
+  <div
+    class="fixed inset-y-0 right-0 w-full max-w-xs bg-white shadow-2xl p-6 flex flex-col justify-between overflow-y-auto"
+  >
     <div>
       <div class="flex items-center justify-between pb-6 border-b border-brand-border">
-        <a href="/" class="flex items-center gap-2 group">
-          <span class="flex items-center justify-center w-9 h-9 rounded-lg bg-brand-navy text-white font-bold text-sm tracking-wider">
+        <a href="/" class="flex items-center gap-2.5 group">
+          <span
+            class="flex items-center justify-center w-10 h-10 rounded-xl bg-brand-navy text-white font-extrabold text-sm tracking-wider"
+          >
             DM
           </span>
-          <span class="font-bold text-brand-navy text-base">Dyer Mandujano</span>
+          <div class="flex flex-col">
+            <span class="font-bold text-brand-navy text-base leading-tight">Dyer Mandujano</span>
+            <span class="text-xs text-brand-muted">Soluciones Digitales</span>
+          </div>
         </a>
         <button
           id="close-menu-btn"
@@ -44,18 +54,20 @@ const { currentPath } = Astro.props;
       <nav class="mt-6 flex flex-col space-y-2">
         {
           NAV_ITEMS.map((item) => {
-            const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+            const isActive =
+              currentPath === item.href ||
+              (item.href !== '/' && currentPath.startsWith(item.href));
             return (
               <a
                 href={item.href}
-                class={`px-4 py-3 rounded-lg text-base font-medium transition-colors flex items-center justify-between ${
+                class={`px-4 py-3 rounded-lg text-base font-semibold transition-colors flex items-center justify-between ${
                   isActive
-                    ? 'bg-blue-50 text-brand-blue font-semibold'
+                    ? 'bg-blue-50 text-brand-blue'
                     : 'text-slate-700 hover:bg-slate-50 hover:text-brand-navy'
                 }`}
               >
                 <span>{item.title}</span>
-                {isActive && <span class="w-1.5 h-1.5 rounded-full bg-brand-blue"></span>}
+                <ArrowRight class="w-4 h-4 opacity-40" />
               </a>
             );
           })
@@ -65,8 +77,8 @@ const { currentPath } = Astro.props;
 
     <!-- CTA Button -->
     <div class="pt-6 border-t border-brand-border">
-      <Button href="/contacto" variant="primary" class="w-full justify-center">
-        <span>Hablemos</span>
+      <Button href="/contacto" variant="primary" class="w-full justify-center py-3">
+        <span>Solicitar cotización</span>
         <ArrowRight class="w-4 h-4 ml-2" />
       </Button>
     </div>
@@ -78,6 +90,7 @@ const { currentPath } = Astro.props;
   const closeBtn = document.getElementById('close-menu-btn');
   const drawer = document.getElementById('mobile-menu-drawer');
   const backdrop = document.getElementById('mobile-menu-backdrop');
+  const links = drawer?.querySelectorAll('nav a');
 
   function openMenu() {
     if (!drawer || !backdrop) return;
@@ -99,7 +112,12 @@ const { currentPath } = Astro.props;
   closeBtn?.addEventListener('click', closeMenu);
   backdrop?.addEventListener('click', closeMenu);
 
-  // Close on ESC
+  // Close menu when a navigation anchor is clicked
+  links?.forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Close on ESC key
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeMenu();
   });

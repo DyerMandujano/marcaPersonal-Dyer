@@ -11,5 +11,7 @@ export interface Project {
   liveUrl?: string;
   featured: boolean;
   status: 'completado' | 'en-desarrollo' | 'pendiente-confirmacion';
+  projectType?: 'académico' | 'demostrativo' | 'profesional';
+  badge?: string;
   highlights?: string[];
 }

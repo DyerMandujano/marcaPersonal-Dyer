@@ -3,9 +3,9 @@ import type { Service } from '@/types/service';
 export const SERVICES: Service[] = [
   {
     id: 'web-development',
-    title: 'Desarrollo de páginas web',
+    title: 'Desarrollo de páginas web empresariales',
     slug: 'desarrollo-web',
-    shortDescription: 'Creación de páginas web profesionales, modernas y adaptadas a las necesidades de cada negocio.',
+    shortDescription: 'Sitios web corporativos modernos, responsivos y optimizados para transmitir confianza y captar clientes.',
     fullDescription:
       'Diseño y desarrollo de sitios web profesionales con diseño responsive, presentación clara de servicios, integración con WhatsApp y formularios de contacto optimizados para captación.',
     iconName: 'Globe',
@@ -21,9 +21,9 @@ export const SERVICES: Service[] = [
   },
   {
     id: 'landing-pages',
-    title: 'Landing Pages de alta conversión',
+    title: 'Landing pages',
     slug: 'landing-pages',
-    shortDescription: 'Páginas diseñadas para presentar productos o servicios y facilitar la captación de clientes.',
+    shortDescription: 'Páginas diseñadas estratégicamente para presentar productos o servicios y maximizar conversiones.',
     fullDescription:
       'Páginas de aterrizaje estratégicas con llamadas a la acción claras, formularios directos y optimización para campañas publicitarias o lanzamientos de servicios.',
     iconName: 'Compass',
@@ -37,10 +37,27 @@ export const SERVICES: Service[] = [
     isFeatured: true,
   },
   {
+    id: 'ecommerce-catalog',
+    title: 'Catálogos digitales y tiendas virtuales',
+    slug: 'catalogos-ecommerce',
+    shortDescription: 'Plataformas digitales organizadas para exhibir inventario y facilitar pedidos directos por internet.',
+    fullDescription:
+      'Catálogos digitales organizados con galerías fotográficas, categorización de productos y enlaces de pedido directo para agilizar la compraventa.',
+    iconName: 'ShoppingBag',
+    features: [
+      'Catálogo estructurado de productos y servicios',
+      'Organización por categorías y filtros de búsqueda',
+      'Galerías de imágenes optimizadas',
+      'Integración fluida con canales de venta directa (WhatsApp)',
+    ],
+    targetAudience: 'Comercios, marcas y emprendedores con inventario físico o digital.',
+    isFeatured: true,
+  },
+  {
     id: 'custom-web-systems',
     title: 'Sistemas web personalizados',
     slug: 'sistemas-web',
-    shortDescription: 'Desarrollo de soluciones web para digitalizar procesos y facilitar la administración de negocios.',
+    shortDescription: 'Soluciones web a medida para digitalizar procesos internos, gestionar información y ahorrar tiempo.',
     fullDescription:
       'Aplicaciones web a medida orientadas a resolver flujos de trabajo internos, administración de datos, paneles de control y automatización de procesos operativos.',
     iconName: 'Cpu',
@@ -54,27 +71,10 @@ export const SERVICES: Service[] = [
     isFeatured: true,
   },
   {
-    id: 'ecommerce-catalog',
-    title: 'Tiendas virtuales y catálogos digitales',
-    slug: 'catalogos-ecommerce',
-    shortDescription: 'Soluciones digitales para mostrar productos y facilitar las ventas por internet.',
-    fullDescription:
-      'Catálogos digitales organizados con galerías fotográficas, categorización de productos y enlaces de pedido directo para agilizar la compraventa.',
-    iconName: 'ShoppingBag',
-    features: [
-      'Catálogo estructurado de productos y servicios',
-      'Organización por categorías y filtros de búsqueda',
-      'Galerías de imágenes optimizadas',
-      'Integración fluida con canales de venta directa (WhatsApp)',
-    ],
-    targetAudience: 'Comercios, marcas y emprendedores con inventario físico o digital.',
-    isFeatured: false,
-  },
-  {
     id: 'business-intelligence',
-    title: 'Inteligencia de negocios',
+    title: 'Inteligencia de negocios y dashboards',
     slug: 'business-intelligence',
-    shortDescription: 'Transformación de datos en información útil para facilitar la toma de decisiones empresariales.',
+    shortDescription: 'Transformación de datos en dashboards interactivos para facilitar la toma de decisiones gerenciales.',
     fullDescription:
       'Creación de dashboards interactivos en Power BI, modelado de consultas SQL y preparación de reportes analíticos para directores y gerentes.',
     iconName: 'BarChart3',
@@ -89,9 +89,9 @@ export const SERVICES: Service[] = [
   },
   {
     id: 'web-maintenance',
-    title: 'Mantenimiento web',
+    title: 'Mantenimiento web y soporte tecnológico',
     slug: 'mantenimiento',
-    shortDescription: 'Mantenimiento y mejora continua de sitios web y aplicaciones existentes.',
+    shortDescription: 'Soporte técnico continuo, actualización de contenidos, mejoras visuales y prevención de incidencias.',
     fullDescription:
       'Soporte técnico preventivo y correctivo, actualización periódica de contenidos, mejoras visuales y optimización técnica para asegurar estabilidad.',
     iconName: 'Wrench',
@@ -102,6 +102,6 @@ export const SERVICES: Service[] = [
       'Soporte técnico continuo y confiable',
     ],
     targetAudience: 'Negocios que ya tienen una web pero necesitan soporte técnico constante.',
-    isFeatured: false,
+    isFeatured: true,
   },
 ];

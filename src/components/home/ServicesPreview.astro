@@ -1,5 +1,94 @@
 ---
-// Componente ServicesPreview - Preparado para desarrollo en Fase 3
+import Container from '@/components/common/Container.astro';
+import SectionTitle from '@/components/common/SectionTitle.astro';
+import { SERVICES } from '@/data/services';
+import {
+  Globe,
+  Compass,
+  ShoppingBag,
+  Cpu,
+  BarChart3,
+  Wrench,
+  ArrowRight,
+  CheckCircle2,
+} from 'lucide-astro';
+
+// Mapa de iconos dinámicos seguros
+const iconMap: Record<string, any> = {
+  Globe,
+  Compass,
+  ShoppingBag,
+  Cpu,
+  BarChart3,
+  Wrench,
+};
 ---
 
-<div id="services-preview-component"></div>
+<section id="servicios" class="py-20 lg:py-28 bg-brand-bg scroll-mt-20">
+  <Container>
+    <SectionTitle
+      tag="Mis Servicios"
+      title="Soluciones tecnológicas orientadas al crecimiento"
+      subtitle="Diseño y desarrollo herramientas digitales pensadas para resolver necesidades reales de emprendedores y empresas."
+    />
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {
+        SERVICES.map((service) => {
+          const IconComponent = iconMap[service.iconName] || Globe;
+          return (
+            <article class="p-8 bg-white border border-brand-border rounded-2xl shadow-subtle hover:shadow-card-hover hover:border-blue-300/80 transition-all duration-300 flex flex-col justify-between group">
+              <div>
+                <!-- Icono del servicio -->
+                <div class="w-13 h-13 p-3.5 rounded-xl bg-blue-50 text-brand-blue group-hover:bg-brand-blue group-hover:text-white transition-colors duration-200 inline-flex items-center justify-center mb-6 border border-blue-100">
+                  <IconComponent class="w-7 h-7" />
+                </div>
+
+                <!-- Título -->
+                <h3 class="text-xl font-bold text-brand-navy mb-3 group-hover:text-brand-blue transition-colors duration-200">
+                  {service.title}
+                </h3>
+
+                <!-- Descripción breve -->
+                <p class="text-sm text-brand-muted leading-relaxed mb-6 font-normal">
+                  {service.shortDescription}
+                </p>
+
+                <!-- Puntos clave del servicio -->
+                <ul class="space-y-2 mb-8 pt-4 border-t border-slate-100">
+                  {service.features.slice(0, 3).map((feature) => (
+                    <li class="flex items-start gap-2.5 text-xs text-slate-600">
+                      <CheckCircle2 class="w-4 h-4 text-brand-blue flex-shrink-0 mt-0.5" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <!-- Enlace de acción -->
+              <div class="pt-4 border-t border-slate-100">
+                <a
+                  href={`/contacto?servicio=${service.slug}`}
+                  class="inline-flex items-center gap-2 text-sm font-semibold text-brand-blue group-hover:text-brand-blue-hover transition-colors"
+                >
+                  <span>Solicitar información</span>
+                  <ArrowRight class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+                </a>
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
+
+    <!-- CTA Secundario a Servicios -->
+    <div class="mt-12 text-center">
+      <p class="text-sm text-brand-muted">
+        ¿Tienes un requerimiento específico para tu empresa?{' '}
+        <a href="/servicios" class="font-semibold text-brand-blue hover:underline">
+          Explora el detalle completo de servicios &rarr;
+        </a>
+      </p>
+    </div>
+  </Container>
+</section>

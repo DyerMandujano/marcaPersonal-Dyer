@@ -1,5 +1,121 @@
 ---
-// Componente AboutPreview - Preparado para desarrollo en Fase 3
+import Container from '@/components/common/Container.astro';
+import Button from '@/components/common/Button.astro';
+import {
+  GraduationCap,
+  Briefcase,
+  ArrowRight,
+} from 'lucide-astro';
 ---
 
-<div id="about-preview-component"></div>
+<section id="sobre-mi" class="py-20 lg:py-28 bg-brand-bg scroll-mt-20">
+  <Container>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      <!-- Columna Izquierda: Tarjeta visual de perfil técnico -->
+      <div class="lg:col-span-5 order-2 lg:order-1">
+        <div class="relative max-w-md mx-auto lg:max-w-none">
+          <!-- Decoración visual -->
+          <div class="absolute -top-4 -left-4 w-24 h-24 bg-blue-100 rounded-3xl -z-10"></div>
+          <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-cyan-100 rounded-3xl -z-10"></div>
+
+          <!-- Tarjeta principal -->
+          <div class="p-8 bg-white border border-brand-border rounded-3xl shadow-card space-y-6">
+            <!-- Cabecera de la tarjeta con avatar tipográfico -->
+            <div class="flex items-center gap-4 pb-6 border-b border-brand-border">
+              <div class="w-16 h-16 rounded-2xl bg-brand-navy text-white flex items-center justify-center font-extrabold text-2xl tracking-wider shadow-md">
+                DM
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-brand-navy">Dyer Mandujano</h3>
+                <p class="text-xs font-semibold text-brand-blue">
+                  Ingeniería de Sistemas Computacionales
+                </p>
+                <p class="text-xs text-brand-muted">Desarrollo Web & Soluciones TI</p>
+              </div>
+            </div>
+
+            <!-- Resumen de trayectoria práctica -->
+            <div class="space-y-4 text-xs sm:text-sm">
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <Briefcase class="w-5 h-5 text-brand-blue flex-shrink-0 mt-0.5" />
+                <div>
+                  <span class="font-bold text-brand-navy block">Prácticas en ONCOCARE S.A.C.</span>
+                  <span class="text-brand-muted">
+                    Área de TI – Desarrollo: Análisis de requerimientos, consultas SQL, Power BI, prototipos Figma y soporte.
+                  </span>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <GraduationCap class="w-5 h-5 text-brand-cyan flex-shrink-0 mt-0.5" />
+                <div>
+                  <span class="font-bold text-brand-navy block">Formación Universitaria</span>
+                  <span class="text-brand-muted">
+                    Estudiante de Ingeniería de Sistemas Computacionales con enfoque en arquitectura y desarrollo.
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tags de áreas de conocimiento -->
+            <div class="pt-2">
+              <div class="text-xs font-semibold text-brand-muted uppercase tracking-wider mb-2.5">
+                Áreas de enfoque técnico
+              </div>
+              <div class="flex flex-wrap gap-1.5">
+                <span class="px-2.5 py-1 text-xs rounded-md bg-blue-50 text-brand-blue font-medium">
+                  Desarrollo Web
+                </span>
+                <span class="px-2.5 py-1 text-xs rounded-md bg-slate-100 text-slate-700 font-medium">
+                  Bases de Datos SQL
+                </span>
+                <span class="px-2.5 py-1 text-xs rounded-md bg-cyan-50 text-cyan-800 font-medium">
+                  Power BI & Dashboards
+                </span>
+                <span class="px-2.5 py-1 text-xs rounded-md bg-slate-100 text-slate-700 font-medium">
+                  Figma & UX/UI
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna Derecha: Narrativa Profesional -->
+      <div class="lg:col-span-7 order-1 lg:order-2 space-y-6 text-left">
+        <span class="inline-block px-3 py-1 text-xs font-semibold tracking-wider uppercase rounded-full bg-blue-50 text-brand-blue border border-blue-100">
+          Sobre Mí
+        </span>
+
+        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-brand-navy leading-tight">
+          Detrás de cada solución digital hay una idea que merece hacerse realidad
+        </h2>
+
+        <div class="space-y-4 text-base text-slate-600 leading-relaxed font-normal">
+          <p>
+            Soy Dyer Mandujano, estudiante de Ingeniería de Sistemas Computacionales y desarrollador de soluciones tecnológicas. Me enfoco en construir herramientas web funcionales, modernas y adaptadas a las metas de emprendedores y empresas.
+          </p>
+
+          <p>
+            Cuento con formación académica continua y experiencia práctica empresarial adquirida durante mis prácticas preprofesionales en el área de TI de <strong class="text-brand-navy font-semibold">ONCOCARE S.A.C.</strong>, donde participé en análisis de requerimientos, diseño de prototipos navegables en Figma, desarrollo de consultas y procedimientos en SQL Server, elaboración de dashboards en Power BI, validaciones funcionales y soporte tecnológico.
+          </p>
+
+          <p>
+            Mi compromiso es ofrecer un servicio cercano, profesional y transparente, aplicando buenas prácticas de desarrollo para que cada proyecto sea una inversión rentable para tu negocio.
+          </p>
+        </div>
+
+        <div class="pt-4 flex flex-wrap items-center gap-4">
+          <Button href="/sobre-mi" variant="primary" size="md">
+            <span>Conoce más sobre mi perfil</span>
+            <ArrowRight class="w-4 h-4 ml-1.5" />
+          </Button>
+
+          <Button href="/contacto" variant="outline" size="md">
+            <span>Conversemos</span>
+          </Button>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>
