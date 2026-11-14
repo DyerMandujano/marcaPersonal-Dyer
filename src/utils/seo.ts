@@ -13,6 +13,9 @@ export function formatPageTitle(pageTitle?: string): string {
   if (!pageTitle) {
     return `${siteConfig.name} | ${siteConfig.role}`;
   }
+  if (pageTitle.includes(siteConfig.name)) {
+    return pageTitle;
+  }
   return `${pageTitle} | ${siteConfig.name}`;
 }
 

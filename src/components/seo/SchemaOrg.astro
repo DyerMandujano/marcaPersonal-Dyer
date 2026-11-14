@@ -12,20 +12,89 @@ const schema = {
       description: siteConfig.description,
       url: siteConfig.url,
       sameAs: [siteConfig.social.github, siteConfig.social.linkedin],
+      knowsAbout: [
+        'Desarrollo Web',
+        'Frontend Development',
+        'Astro Framework',
+        'TypeScript',
+        'Angular',
+        'Spring Boot',
+        'Microsoft SQL Server',
+        'Power BI',
+        'Diseño UX/UI en Figma',
+      ],
+      alumniOf: {
+        '@type': 'EducationalOrganization',
+        name: 'Ingeniería de Sistemas Computacionales',
+      },
     },
     {
       '@type': 'ProfessionalService',
       '@id': `${siteConfig.url}/#service`,
-      name: `${siteConfig.name} - Soluciones Digitales`,
+      name: `${siteConfig.name} – Desarrollo Web y Soluciones Digitales`,
       url: siteConfig.url,
       description: siteConfig.description,
       priceRange: '$$',
-      areaServed: {
-        '@type': 'Country',
-        name: 'Perú',
+      image: `${siteConfig.url}/favicon.svg`,
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Lima',
+        addressRegion: 'Lima',
+        addressCountry: 'PE',
       },
+      areaServed: [
+        {
+          '@type': 'City',
+          name: 'Lima',
+        },
+        {
+          '@type': 'Country',
+          name: 'Perú',
+        },
+      ],
       provider: {
         '@id': `${siteConfig.url}/#person`,
+      },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Servicios de Desarrollo y Soluciones Digitales',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Desarrollo de páginas web empresariales',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Landing pages de alta conversión',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Sistemas web personalizados',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Inteligencia de negocios y dashboards en Power BI',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Mantenimiento web y soporte tecnológico',
+            },
+          },
+        ],
       },
     },
   ],

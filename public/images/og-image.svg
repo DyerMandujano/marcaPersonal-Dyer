@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <defs>
+    <linearGradient id="og-bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#101828"/>
+      <stop offset="1" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="text-grad" x1="0" y1="0" x2="600" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#38BDF8"/>
+      <stop offset="1" stop-color="#2563EB"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#og-bg)"/>
+
+  <!-- Subtle grid lines -->
+  <g opacity="0.08" stroke="#FFFFFF" stroke-width="1">
+    <path d="M0 105H1200 M0 210H1200 M0 315H1200 M0 420H1200 M0 525H1200"/>
+    <path d="M150 0V630 M300 0V630 M450 0V630 M600 0V630 M750 0V630 M900 0V630 M1050 0V630"/>
+  </g>
+
+  <!-- Glowing accents -->
+  <circle cx="200" cy="150" r="180" fill="#2563EB" opacity="0.25" filter="blur(80px)"/>
+  <circle cx="1000" cy="450" r="200" fill="#06B6D4" opacity="0.2" filter="blur(90px)"/>
+
+  <!-- Brand container -->
+  <g transform="translate(100, 100)">
+    <!-- Logo DM -->
+    <rect width="70" height="70" rx="18" fill="#2563EB"/>
+    <text x="35" y="46" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="900" fill="#FFFFFF" text-anchor="middle">DM</text>
+    <circle cx="56" cy="20" r="4.5" fill="#06B6D4"/>
+
+    <!-- Badge -->
+    <rect x="95" y="16" width="280" height="38" rx="19" fill="#1E293B" stroke="#334155"/>
+    <circle cx="115" cy="35" r="4" fill="#06B6D4"/>
+    <text x="130" y="40" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#94A3B8">Desarrollo Web &amp; Soluciones TI</text>
+
+    <!-- Main Title -->
+    <text x="0" y="170" font-family="system-ui, -apple-system, sans-serif" font-size="56" font-weight="900" fill="#FFFFFF" letter-spacing="-1.5">
+      Dyer Mandujano
+    </text>
+
+    <!-- Subtitle -->
+    <text x="0" y="235" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="700" fill="url(#text-grad)">
+      Transformo ideas en soluciones digitales
+    </text>
+
+    <text x="0" y="275" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="700" fill="#FFFFFF">
+      para impulsar tu negocio
+    </text>
+
+    <!-- Description -->
+    <text x="0" y="340" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="400" fill="#94A3B8">
+      Páginas Web Corporativas • Landing Pages • Sistemas a Medida • Power BI &amp; SQL
+    </text>
+
+    <!-- Bottom tags -->
+    <g transform="translate(0, 390)">
+      <rect x="0" y="0" width="120" height="36" rx="10" fill="#1E293B"/>
+      <text x="60" y="23" font-family="monospace" font-size="14" font-weight="600" fill="#38BDF8" text-anchor="middle">Astro SSG</text>
+
+      <rect x="135" y="0" width="130" height="36" rx="10" fill="#1E293B"/>
+      <text x="200" y="23" font-family="monospace" font-size="14" font-weight="600" fill="#38BDF8" text-anchor="middle">TypeScript</text>
+
+      <rect x="280" y="0" width="130" height="36" rx="10" fill="#1E293B"/>
+      <text x="345" y="23" font-family="monospace" font-size="14" font-weight="600" fill="#38BDF8" text-anchor="middle">Tailwind CSS</text>
+
+      <rect x="425" y="0" width="120" height="36" rx="10" fill="#1E293B"/>
+      <text x="485" y="23" font-family="monospace" font-size="14" font-weight="600" fill="#38BDF8" text-anchor="middle">Power BI</text>
+
+      <rect x="560" y="0" width="130" height="36" rx="10" fill="#1E293B"/>
+      <text x="625" y="23" font-family="monospace" font-size="14" font-weight="600" fill="#38BDF8" text-anchor="middle">SQL Server</text>
+    </g>
+  </g>
+</svg>

@@ -24,7 +24,7 @@ export const siteConfig: SiteConfig = {
 
   // 3. Autor y metadatos
   author: 'Dyer Mandujano',
-  ogImage: '/images/og-image.png',
+  ogImage: '/images/og-image.svg',
 
   // 4. Redes sociales y canales de contacto profesionales
   social: {
