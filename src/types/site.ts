@@ -7,6 +7,7 @@ export interface NavItem {
 export interface SocialLinks {
   github: string;
   linkedin: string;
+  whatsappNumber: string; // Número internacional (ej. +51999999999)
   whatsapp: string;
   email: string;
 }

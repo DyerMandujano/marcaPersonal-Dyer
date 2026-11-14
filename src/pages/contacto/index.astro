@@ -148,6 +148,7 @@ import {
             <form
               id="quote-form"
               data-endpoint={formspreeConfig.endpoint}
+              data-whatsapp-number={siteConfig.social.whatsappNumber}
               class="space-y-6"
               novalidate
             >
@@ -336,6 +337,7 @@ import {
     if (!isValid) return;
 
     const endpoint = form.getAttribute('data-endpoint') || '';
+    const waNumber = (form.getAttribute('data-whatsapp-number') || '51999999999').replace(/[^0-9]/g, '');
 
     // Si el endpoint es el placeholder por defecto, no simulamos un envío falso:
     // Informamos honestamente y facilitamos enviar la solicitud directamente por WhatsApp.
@@ -353,7 +355,7 @@ import {
           ¿Deseas enviar tus datos inmediatamente por WhatsApp?
         </p>
         <a
-          href="https://wa.me/51999999999?text=${encodeURIComponent(
+          href="https://wa.me/${waNumber}?text=${encodeURIComponent(
             `Hola Dyer, soy ${nameInput.value.trim()}${
               businessInput.value.trim() ? ` de ${businessInput.value.trim()}` : ''
             }. Me interesa cotizar el servicio de ${serviceSelect.value}.${

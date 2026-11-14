@@ -25,7 +25,7 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Accesibilidad: respeta la preferencia de movimiento reducido */
+  /* Accesibilidad: respeta estrictamente la preferencia de movimiento reducido */
   @media (prefers-reduced-motion: reduce) {
     *,
     ::before,
@@ -34,6 +34,11 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
+    }
+
+    .reveal-on-scroll {
+      opacity: 1 !important;
+      transform: none !important;
     }
   }
 }
@@ -46,27 +51,40 @@
 
   /* Botones base reutilizables */
   .btn {
-    @apply inline-flex items-center justify-center font-medium transition-all duration-200 rounded-lg text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-offset-2;
+    @apply inline-flex items-center justify-center font-semibold transition-all duration-200 rounded-xl text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-offset-2;
   }
 
   .btn-primary {
-    @apply btn bg-brand-blue text-white hover:bg-brand-blue-hover focus:ring-brand-blue shadow-sm;
+    @apply btn bg-brand-blue text-white hover:bg-brand-blue-hover focus:ring-brand-blue shadow-sm active:translate-y-0.5;
   }
 
   .btn-secondary {
-    @apply btn bg-brand-navy text-white hover:bg-slate-800 focus:ring-brand-navy shadow-sm;
+    @apply btn bg-brand-navy text-white hover:bg-slate-800 focus:ring-brand-navy shadow-sm active:translate-y-0.5;
   }
 
   .btn-outline {
-    @apply btn bg-transparent border border-brand-border text-brand-text hover:bg-slate-100 hover:border-slate-300 focus:ring-brand-blue;
+    @apply btn bg-white border border-brand-border text-brand-text hover:bg-slate-50 hover:border-slate-300 focus:ring-brand-blue active:translate-y-0.5;
   }
 
-  /* Tarjetas base */
+  /* Tarjetas base con microinteracciones sutiles */
   .card-base {
-    @apply bg-white border border-brand-border rounded-xl transition-all duration-200;
+    @apply bg-white border border-brand-border rounded-2xl transition-all duration-300;
   }
 
   .card-hover {
     @apply card-base hover:shadow-card-hover hover:border-blue-200 hover:-translate-y-1;
+  }
+
+  /* Animación de entrada progresiva en scroll */
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
+  .reveal-on-scroll.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

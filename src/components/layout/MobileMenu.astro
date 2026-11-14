@@ -98,6 +98,7 @@ const { currentPath } = Astro.props;
     backdrop.classList.remove('opacity-0');
     drawer.setAttribute('aria-hidden', 'false');
     document.body.classList.add('overflow-hidden');
+    closeBtn?.focus();
   }
 
   function closeMenu() {
@@ -106,6 +107,7 @@ const { currentPath } = Astro.props;
     backdrop.classList.add('opacity-0');
     drawer.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('overflow-hidden');
+    openBtn?.focus();
   }
 
   openBtn?.addEventListener('click', openMenu);

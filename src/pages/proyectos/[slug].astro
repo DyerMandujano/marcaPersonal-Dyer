@@ -14,6 +14,7 @@ import {
   Lightbulb,
   Layers,
   ArrowRight,
+  Clock,
 } from 'lucide-astro';
 
 export async function getStaticPaths() {
@@ -92,7 +93,7 @@ const { project } = Astro.props;
           }
 
           {
-            project.liveUrl && (
+            project.liveUrl ? (
               <Button
                 href={project.liveUrl}
                 variant="primary"
@@ -103,6 +104,11 @@ const { project } = Astro.props;
                 <span>Ver demostración en vivo</span>
                 <ExternalLink class="w-4 h-4 ml-2" />
               </Button>
+            ) : (
+              <div class="inline-flex items-center gap-1.5 px-3.5 py-2.5 text-xs font-semibold text-slate-500 bg-slate-100 rounded-xl border border-slate-200">
+                <Clock class="w-3.5 h-3.5 text-slate-400" />
+                <span>Demostración en vivo: disponible a solicitud</span>
+              </div>
             )
           }
 

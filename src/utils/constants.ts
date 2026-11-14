@@ -1,34 +1,37 @@
-export { siteConfig, formspreeConfig } from '@/config/site';
+export {
+  siteConfig,
+  formspreeConfig,
+  getWhatsAppUrl,
+  WHATSAPP_PHONE_NUMBER,
+} from '@/config/site';
 
 export const WORK_PROCESS_STEPS = [
   {
     step: '01',
-    title: 'Análisis',
-    description: 'Identificación de necesidades, objetivos comerciales y requerimientos del cliente.',
+    title: 'Análisis de necesidades',
+    description:
+      'Identificación de requerimientos comerciales, objetivos del cliente y alcance del proyecto.',
     icon: 'Search',
   },
   {
     step: '02',
-    title: 'Diseño',
-    description: 'Elaboración de propuestas visuales, arquitectura de información y prototipos.',
+    title: 'Diseño y prototipado',
+    description:
+      'Estructuración visual de wireframes y prototipos navegables antes de programar.',
     icon: 'Layout',
   },
   {
     step: '03',
-    title: 'Desarrollo',
-    description: 'Programación limpia, componentes reutilizables y buenas prácticas de código.',
+    title: 'Desarrollo e implementación',
+    description:
+      'Construcción con código limpio, arquitectura desacoplada, accesibilidad y diseño responsive.',
     icon: 'Code2',
   },
   {
     step: '04',
-    title: 'Pruebas',
-    description: 'Validación funcional, rendimiento, accesibilidad y diseño responsive.',
+    title: 'Pruebas y entrega',
+    description:
+      'Control de calidad integral, validación en diferentes dispositivos y navegadores, puesta en producción y orientación.',
     icon: 'CheckCircle2',
-  },
-  {
-    step: '05',
-    title: 'Entrega',
-    description: 'Publicación en producción, documentación y orientación personalizada.',
-    icon: 'Rocket',
   },
 ] as const;
