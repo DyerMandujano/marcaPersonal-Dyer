@@ -5,7 +5,16 @@ import Badge from '@/components/common/Badge.astro';
 import Button from '@/components/common/Button.astro';
 import { PROJECTS } from '@/data/projects';
 import type { Project } from '@/types/project';
-import { ArrowLeft, Github, ExternalLink, CheckCircle2 } from 'lucide-astro';
+import {
+  ArrowLeft,
+  Github,
+  ExternalLink,
+  CheckCircle2,
+  AlertCircle,
+  Lightbulb,
+  Layers,
+  ArrowRight,
+} from 'lucide-astro';
 
 export async function getStaticPaths() {
   return PROJECTS.map((project) => ({
@@ -22,96 +31,190 @@ const { project } = Astro.props;
 ---
 
 <MainLayout
-  title={`${project.title} | Portafolio`}
+  title={`${project.title} | Ficha Técnica`}
   description={project.description}
+  image={project.image}
 >
-  <article class="py-16 sm:py-20">
-    <Container class="max-w-4xl">
-      <!-- Back button -->
+  <!-- Barra de navegación secundaria / Breadcrumb -->
+  <div class="bg-white border-b border-brand-border py-4">
+    <Container class="max-w-5xl">
       <a
         href="/proyectos"
-        class="inline-flex items-center gap-2 text-sm text-brand-muted hover:text-brand-blue mb-8 transition-colors"
+        class="inline-flex items-center gap-2 text-sm font-semibold text-brand-muted hover:text-brand-blue transition-colors"
       >
         <ArrowLeft class="w-4 h-4" />
-        <span>Volver a proyectos</span>
+        <span>Volver al portafolio de proyectos</span>
       </a>
+    </Container>
+  </div>
 
-      <!-- Header -->
-      <div class="mb-8">
-        <div class="flex flex-wrap items-center gap-2 mb-4">
-          <Badge variant="blue">{project.category}</Badge>
-          {project.status === 'en-desarrollo' && <Badge variant="neutral">En desarrollo</Badge>}
+  <article class="py-12 sm:py-20 bg-brand-bg">
+    <Container class="max-w-5xl space-y-12">
+      <!-- Encabezado del Proyecto -->
+      <div class="p-8 sm:p-12 bg-white border border-brand-border rounded-3xl shadow-card space-y-6">
+        <div class="flex flex-wrap items-center gap-2">
+          <Badge variant="blue" size="md">{project.category}</Badge>
+          {
+            project.badge && (
+              <Badge
+                variant={project.projectType === 'académico' ? 'cyan' : 'neutral'}
+                size="md"
+              >
+                {project.badge}
+              </Badge>
+            )
+          }
         </div>
-        <h1 class="text-3xl sm:text-4xl font-bold text-brand-navy tracking-tight">
+
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-navy tracking-tight leading-tight">
           {project.title}
         </h1>
-        <p class="mt-4 text-lg text-brand-muted leading-relaxed">
+
+        <p class="text-base sm:text-lg text-brand-muted leading-relaxed max-w-3xl font-normal">
           {project.description}
         </p>
-      </div>
 
-      <!-- Action buttons -->
-      <div class="flex flex-wrap items-center gap-4 py-4 border-y border-brand-border mb-8">
-        {project.githubUrl && (
+        <!-- Botones de Acción (Repo / Demo / Cotización) -->
+        <div class="flex flex-wrap items-center gap-4 pt-4 border-t border-brand-border">
+          {
+            project.githubUrl && (
+              <Button
+                href={project.githubUrl}
+                variant="outline"
+                size="md"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Github class="w-4 h-4 mr-2" />
+                <span>Ver repositorio en GitHub</span>
+              </Button>
+            )
+          }
+
+          {
+            project.liveUrl && (
+              <Button
+                href={project.liveUrl}
+                variant="primary"
+                size="md"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>Ver demostración en vivo</span>
+                <ExternalLink class="w-4 h-4 ml-2" />
+              </Button>
+            )
+          }
+
           <Button
-            href={project.githubUrl}
-            variant="outline"
-            size="sm"
-            target="_blank"
-            rel="noopener noreferrer"
+            href={`/contacto?proyecto=${project.slug}`}
+            variant="secondary"
+            size="md"
           >
-            <Github class="w-4 h-4 mr-2" />
-            <span>Ver repositorio GitHub</span>
+            <span>Cotizar un proyecto similar</span>
+            <ArrowRight class="w-4 h-4 ml-2" />
           </Button>
-        )}
-        {project.liveUrl && (
-          <Button
-            href={project.liveUrl}
-            variant="primary"
-            size="sm"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span>Ver demo en vivo</span>
-            <ExternalLink class="w-4 h-4 ml-2" />
-          </Button>
-        )}
-      </div>
-
-      <!-- Tech Stack -->
-      <div class="mb-8">
-        <h2 class="text-lg font-semibold text-brand-navy mb-3">Tecnologías utilizadas</h2>
-        <div class="flex flex-wrap gap-2">
-          {project.tags.map((tag) => (
-            <span class="px-3 py-1 text-sm bg-slate-100 text-slate-700 font-medium rounded-lg">
-              {tag}
-            </span>
-          ))}
         </div>
       </div>
 
-      <!-- Overview -->
-      {project.longDescription && (
-        <div class="mb-8">
-          <h2 class="text-lg font-semibold text-brand-navy mb-3">Descripción general</h2>
-          <p class="text-slate-600 leading-relaxed">{project.longDescription}</p>
-        </div>
-      )}
+      <!-- Imagen Principal del Proyecto -->
+      <div class="rounded-3xl overflow-hidden border border-brand-border shadow-card bg-slate-900 aspect-[16/9]">
+        <img
+          src={project.image}
+          alt={`Captura principal de ${project.title}`}
+          class="w-full h-full object-cover object-top"
+        />
+      </div>
 
-      <!-- Highlights -->
-      {project.highlights && project.highlights.length > 0 && (
-        <div class="mb-12">
-          <h2 class="text-lg font-semibold text-brand-navy mb-4">Características principales</h2>
-          <ul class="space-y-3">
-            {project.highlights.map((highlight) => (
-              <li class="flex items-start gap-3 text-slate-600">
-                <CheckCircle2 class="w-5 h-5 text-brand-blue flex-shrink-0 mt-0.5" />
-                <span>{highlight}</span>
-              </li>
-            ))}
-          </ul>
+      <!-- Bloque Problema Identificado vs Solución Desarrollada -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Problema -->
+        <div class="p-8 bg-white border border-brand-border rounded-3xl shadow-subtle space-y-4">
+          <div class="flex items-center gap-2.5 text-brand-navy font-bold text-base">
+            <div class="p-2 rounded-xl bg-amber-50 text-amber-600 border border-amber-200">
+              <AlertCircle class="w-5 h-5" />
+            </div>
+            <span>Problema Identificado</span>
+          </div>
+          <p class="text-sm text-slate-600 leading-relaxed font-normal">
+            {project.problemIdentified}
+          </p>
         </div>
-      )}
+
+        <!-- Solución -->
+        <div class="p-8 bg-white border border-brand-border rounded-3xl shadow-subtle space-y-4">
+          <div class="flex items-center gap-2.5 text-brand-navy font-bold text-base">
+            <div class="p-2 rounded-xl bg-blue-50 text-brand-blue border border-blue-200">
+              <Lightbulb class="w-5 h-5" />
+            </div>
+            <span>Solución Desarrollada</span>
+          </div>
+          <p class="text-sm text-slate-600 leading-relaxed font-normal">
+            {project.developedSolution}
+          </p>
+        </div>
+      </div>
+
+      <!-- Descripción Detallada y Funcionalidades -->
+      <div class="p-8 sm:p-12 bg-white border border-brand-border rounded-3xl shadow-card space-y-8">
+        <div>
+          <h2 class="text-2xl font-bold text-brand-navy mb-4">
+            Descripción y Enfoque Arquitectónico
+          </h2>
+          <p class="text-base text-slate-600 leading-relaxed">
+            {project.longDescription}
+          </p>
+        </div>
+
+        <div class="pt-8 border-t border-brand-border">
+          <h2 class="text-2xl font-bold text-brand-navy mb-6">
+            Funcionalidades Implementadas
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {
+              project.features.map((feature) => (
+                <div class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                  <CheckCircle2 class="w-5 h-5 text-brand-blue flex-shrink-0 mt-0.5" />
+                  <span class="text-sm text-slate-700 font-medium">{feature}</span>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Tecnologías Utilizadas -->
+        <div class="pt-8 border-t border-brand-border">
+          <div class="flex items-center gap-2 mb-4">
+            <Layers class="w-5 h-5 text-brand-blue" />
+            <h2 class="text-xl font-bold text-brand-navy">Tecnologías Utilizadas</h2>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            {
+              project.tags.map((tag) => (
+                <span class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 text-slate-800 border border-slate-200">
+                  {tag}
+                </span>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Inferior -->
+      <div class="p-8 sm:p-10 rounded-3xl bg-brand-navy text-white flex flex-col md:flex-row items-center justify-between gap-6">
+        <div>
+          <h3 class="text-xl font-bold text-white mb-2">
+            ¿Necesitas una solución similar para tu negocio?
+          </h3>
+          <p class="text-sm text-slate-300">
+            Conversemos sobre tu requerimiento y te preparo una propuesta personalizada.
+          </p>
+        </div>
+        <Button href="/contacto" variant="primary" size="md" class="flex-shrink-0">
+          <span>Solicitar cotización</span>
+          <ArrowRight class="w-4 h-4 ml-2" />
+        </Button>
+      </div>
     </Container>
   </article>
 </MainLayout>

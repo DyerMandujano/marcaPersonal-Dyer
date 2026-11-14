@@ -1,42 +1,206 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
 import Container from '@/components/common/Container.astro';
-import SectionTitle from '@/components/common/SectionTitle.astro';
+import Badge from '@/components/common/Badge.astro';
+import Button from '@/components/common/Button.astro';
 import { SERVICES } from '@/data/services';
+import {
+  Globe,
+  Compass,
+  ShoppingBag,
+  Cpu,
+  BarChart3,
+  Wrench,
+  ArrowRight,
+  CheckCircle2,
+  AlertCircle,
+  Sparkles,
+  Layers,
+} from 'lucide-astro';
+
+const iconMap: Record<string, any> = {
+  Globe,
+  Compass,
+  ShoppingBag,
+  Cpu,
+  BarChart3,
+  Wrench,
+};
 ---
 
 <MainLayout
   title="Servicios de Desarrollo Web & Soluciones Digitales"
-  description="Servicios profesionales de desarrollo web, landing pages, sistemas a medida, inteligencia de negocios y mantenimiento web."
+  description="Servicios profesionales de desarrollo web corporativo, landing pages de alta conversión, sistemas a medida, inteligencia de negocios y soporte técnico continuo."
 >
-  <section class="py-16 sm:py-20">
-    <Container>
-      <SectionTitle
-        tag="Servicios Profesionales"
-        title="Soluciones diseñadas para impulsar tu negocio"
-        subtitle="Cada proyecto se diseña a la medida de tus necesidades comerciales, con altos estándares de rendimiento y usabilidad."
-      />
+  <!-- Cabecera de Página -->
+  <section class="py-16 sm:py-24 bg-gradient-to-b from-white to-brand-bg border-b border-brand-border">
+    <Container class="text-center max-w-4xl">
+      <Badge variant="blue" size="md" class="mb-4">
+        <Sparkles class="w-3.5 h-3.5" />
+        <span>Especialidades & Servicios</span>
+      </Badge>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <h1 class="text-3xl sm:text-5xl font-extrabold text-brand-navy tracking-tight leading-tight">
+        Soluciones Digitales Pensadas para el <br class="hidden sm:inline" />
+        <span class="text-brand-blue">Crecimiento de tu Negocio</span>
+      </h1>
+
+      <p class="mt-6 text-base sm:text-lg text-brand-muted max-w-2xl mx-auto leading-relaxed">
+        Cada proyecto se diseña a la medida de tus objetivos comerciales. Sin plantillas sobrecargadas: desarrollo limpio, rápido, accesible y enfocado en generar resultados.
+      </p>
+
+      <!-- Píldoras rápidas de salto a servicios -->
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-2 pt-4">
         {
-          SERVICES.map((service) => (
-            <article class="p-6 bg-white border border-brand-border rounded-xl shadow-subtle hover:shadow-card-hover hover:border-blue-200 transition-all">
-              <h3 class="text-xl font-bold text-brand-navy mb-2">{service.title}</h3>
-              <p class="text-sm text-brand-muted mb-4">{service.shortDescription}</p>
-              <ul class="space-y-1.5 text-xs text-slate-600 mb-6">
-                {service.features.slice(0, 3).map((feature) => (
-                  <li class="flex items-center gap-2">
-                    <span class="w-1.5 h-1.5 rounded-full bg-brand-blue"></span>
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <a href="/contacto" class="text-xs font-semibold text-brand-blue hover:underline">
-                Solicitar información &rarr;
-              </a>
-            </article>
+          SERVICES.map((s) => (
+            <a
+              href={`#${s.slug}`}
+              class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-white border border-brand-border text-slate-700 hover:text-brand-blue hover:border-blue-300 transition-colors shadow-xs"
+            >
+              {s.title}
+            </a>
           ))
         }
+      </div>
+    </Container>
+  </section>
+
+  <!-- Listado Detallado de Servicios -->
+  <section class="py-16 sm:py-24 bg-brand-bg">
+    <Container class="max-w-6xl space-y-16">
+      {
+        SERVICES.map((service, index) => {
+          const IconComponent = iconMap[service.iconName] || Globe;
+          return (
+            <article
+              id={service.slug}
+              class="p-8 sm:p-10 lg:p-12 bg-white border border-brand-border rounded-3xl shadow-card scroll-mt-24 transition-all duration-200"
+            >
+              <!-- Encabezado del servicio -->
+              <div class="flex flex-col md:flex-row md:items-start justify-between gap-6 pb-8 border-b border-brand-border">
+                <div class="flex items-start gap-5">
+                  <div class="w-14 h-14 p-3.5 rounded-2xl bg-blue-50 text-brand-blue border border-blue-100 flex items-center justify-center flex-shrink-0 shadow-xs">
+                    <IconComponent class="w-7 h-7" />
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                      <span class="text-xs font-mono font-bold text-brand-muted uppercase tracking-wider">
+                        Servicio {String(index + 1).padStart(2, '0')}
+                      </span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-navy tracking-tight">
+                      {service.title}
+                    </h2>
+                    <p class="mt-2 text-base text-brand-muted leading-relaxed">
+                      {service.shortDescription}
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Botón de cotización directo -->
+                <div class="flex-shrink-0 md:self-center">
+                  <Button
+                    href={`/contacto?servicio=${service.slug}`}
+                    variant="primary"
+                    size="md"
+                    class="w-full sm:w-auto shadow-sm"
+                  >
+                    <span>Solicitar cotización</span>
+                    <ArrowRight class="w-4 h-4 ml-1.5" />
+                  </Button>
+                </div>
+              </div>
+
+              <!-- Bloque: Problema que resuelve & Beneficios -->
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 py-8 border-b border-brand-border">
+                <!-- Problema que resuelve -->
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/80">
+                  <div class="flex items-center gap-2.5 text-slate-800 font-bold text-sm mb-3">
+                    <AlertCircle class="w-5 h-5 text-amber-500 flex-shrink-0" />
+                    <span>El problema que resuelve</span>
+                  </div>
+                  <p class="text-sm text-slate-600 leading-relaxed font-normal">
+                    {service.problemSolved}
+                  </p>
+                </div>
+
+                <!-- Beneficios clave -->
+                <div class="p-6 rounded-2xl bg-blue-50/60 border border-blue-100/80">
+                  <div class="flex items-center gap-2.5 text-brand-blue font-bold text-sm mb-3">
+                    <Sparkles class="w-5 h-5 text-brand-blue flex-shrink-0" />
+                    <span>Beneficios para tu negocio</span>
+                  </div>
+                  <ul class="space-y-2 text-sm text-slate-700">
+                    {service.benefits.map((benefit) => (
+                      <li class="flex items-start gap-2">
+                        <CheckCircle2 class="w-4 h-4 text-brand-blue flex-shrink-0 mt-0.5" />
+                        <span>{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Características principales y Tecnologías -->
+              <div class="pt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Características -->
+                <div class="lg:col-span-8">
+                  <h3 class="text-sm font-bold uppercase tracking-wider text-brand-navy mb-4">
+                    Características principales incluidas
+                  </h3>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {service.features.map((feature) => (
+                      <div class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 p-2.5 rounded-lg bg-slate-50/50">
+                        <CheckCircle2 class="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
+                        <span>{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <!-- Tecnologías -->
+                <div class="lg:col-span-4 p-5 rounded-2xl bg-slate-50 border border-slate-200/80">
+                  <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-navy mb-3">
+                    <Layers class="w-4 h-4 text-brand-blue" />
+                    <span>Tecnologías aplicadas</span>
+                  </div>
+                  <p class="text-xs text-brand-muted mb-3 font-normal">
+                    Herramientas de vanguardia seleccionadas según los requerimientos:
+                  </p>
+                  <div class="flex flex-wrap gap-1.5">
+                    {service.technologies.map((tech) => (
+                      <span class="px-2.5 py-1 text-xs font-semibold rounded-md bg-white text-slate-700 border border-slate-200">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div class="mt-6 pt-4 border-t border-slate-200 text-xs text-brand-muted">
+                    <strong class="text-slate-700">Público ideal:</strong> {service.targetAudience}
+                  </div>
+                </div>
+              </div>
+            </article>
+          );
+        })
+      }
+    </Container>
+  </section>
+
+  <!-- CTA Final -->
+  <section class="py-16 sm:py-20 bg-brand-navy text-white text-center">
+    <Container class="max-w-3xl">
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-4">
+        ¿Tienes dudas sobre qué servicio se adapta mejor a tu necesidad?
+      </h2>
+      <p class="text-slate-300 text-sm sm:text-base mb-8 leading-relaxed">
+        Cuéntame en qué etapa se encuentra tu negocio y te orientaré sin compromiso sobre la mejor solución tecnológica.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <Button href="/contacto" variant="primary" size="lg">
+          <span>Solicitar asesoría gratuita</span>
+          <ArrowRight class="w-5 h-5 ml-1.5" />
+        </Button>
       </div>
     </Container>
   </section>

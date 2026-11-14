@@ -1,58 +1,188 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
 import Container from '@/components/common/Container.astro';
-import SectionTitle from '@/components/common/SectionTitle.astro';
 import Badge from '@/components/common/Badge.astro';
 import { PROJECTS } from '@/data/projects';
-import { ArrowUpRight } from 'lucide-astro';
+import { ArrowUpRight, Github, Sparkles } from 'lucide-astro';
+
+// Categorías únicas para el filtro
+const categories = ['Todos', 'Plataforma web', 'Inteligencia de negocios', 'Sistema web'];
 ---
 
 <MainLayout
-  title="Portafolio de Proyectos Web & Sistemas"
-  description="Proyectos desarrollados y en curso por Dyer Mandujano: plataformas web, sistemas administrativos y dashboards de analítica de datos."
+  title="Portafolio de Proyectos Web & Soluciones Digitales"
+  description="Explora proyectos reales, académicos y demostrativos desarrollados por Dyer Mandujano: plataformas web, sistemas a medida y dashboards de datos."
 >
-  <section class="py-16 sm:py-20">
-    <Container>
-      <SectionTitle
-        tag="Portafolio de Trabajo"
-        title="Proyectos y soluciones desarrolladas"
-        subtitle="Explora casos reales de desarrollo de software, plataformas web e inteligencia de negocios."
-      />
+  <!-- Cabecera -->
+  <section class="py-16 sm:py-24 bg-gradient-to-b from-white to-brand-bg border-b border-brand-border">
+    <Container class="text-center max-w-4xl">
+      <Badge variant="blue" size="md" class="mb-4">
+        <Sparkles class="w-3.5 h-3.5" />
+        <span>Portafolio Profesional</span>
+      </Badge>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <h1 class="text-3xl sm:text-5xl font-extrabold text-brand-navy tracking-tight leading-tight">
+        Proyectos & Soluciones Desarrolladas
+      </h1>
+
+      <p class="mt-6 text-base sm:text-lg text-brand-muted max-w-2xl mx-auto leading-relaxed">
+        Una muestra representativa de mi trabajo en desarrollo de software, modelado de bases de datos relacionales y visualización analítica.
+      </p>
+
+      <!-- Barra de Filtros interactiva -->
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-2" id="portfolio-filter-buttons">
         {
-          PROJECTS.map((project) => (
-            <article class="p-6 bg-white border border-brand-border rounded-xl shadow-subtle hover:shadow-card-hover transition-all flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-4">
-                  <Badge variant="blue">{project.category}</Badge>
-                  {project.status === 'en-desarrollo' && (
-                    <Badge variant="neutral">En desarrollo</Badge>
-                  )}
-                </div>
-                <h3 class="text-xl font-bold text-brand-navy mb-2">{project.title}</h3>
-                <p class="text-sm text-brand-muted mb-4">{project.description}</p>
-                <div class="flex flex-wrap gap-1.5 mb-6">
-                  {project.tags.map((tag) => (
-                    <span class="px-2 py-0.5 text-xs bg-slate-100 text-slate-600 rounded">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div class="pt-4 border-t border-brand-border flex items-center justify-between">
-                <a
-                  href={`/proyectos/${project.slug}`}
-                  class="text-xs font-semibold text-brand-blue hover:underline inline-flex items-center gap-1"
-                >
-                  <span>Ver detalles</span>
-                  <ArrowUpRight class="w-3.5 h-3.5" />
-                </a>
-              </div>
-            </article>
+          categories.map((cat, i) => (
+            <button
+              type="button"
+              data-filter={cat}
+              class={`filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 border ${
+                i === 0
+                  ? 'bg-brand-navy text-white border-brand-navy shadow-sm'
+                  : 'bg-white text-slate-700 border-brand-border hover:bg-slate-50 hover:border-slate-300'
+              }`}
+            >
+              {cat}
+            </button>
           ))
         }
       </div>
     </Container>
   </section>
+
+  <!-- Grilla de Proyectos con Filtrado Dinámico -->
+  <section class="py-16 sm:py-24 bg-brand-bg">
+    <Container class="max-w-7xl">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+        {
+          PROJECTS.map((project) => (
+            <article
+              data-category={project.category}
+              class="project-card bg-white border border-brand-border rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between group"
+            >
+              <div>
+                <!-- Mockup / Portada -->
+                <div class="relative overflow-hidden aspect-[16/10] bg-slate-900 border-b border-brand-border">
+                  <img
+                    src={project.image}
+                    alt={`Vista previa del proyecto ${project.title}`}
+                    class="w-full h-full object-cover object-top group-hover:scale-102 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                  <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+                    <Badge variant="blue" size="sm">
+                      {project.category}
+                    </Badge>
+                    {project.badge && (
+                      <Badge
+                        variant={project.projectType === 'académico' ? 'cyan' : 'neutral'}
+                        size="sm"
+                      >
+                        {project.badge}
+                      </Badge>
+                    )}
+                  </div>
+                </div>
+
+                <!-- Detalles principales -->
+                <div class="p-6 sm:p-7">
+                  <h2 class="text-xl font-bold text-brand-navy mb-2 group-hover:text-brand-blue transition-colors">
+                    {project.title}
+                  </h2>
+
+                  <p class="text-sm text-brand-muted leading-relaxed mb-6 font-normal">
+                    {project.description}
+                  </p>
+
+                  <!-- Tecnologías -->
+                  <div class="flex flex-wrap gap-1.5">
+                    {project.tags.map((tag) => (
+                      <span class="px-2.5 py-1 text-xs font-semibold rounded-md bg-slate-100 text-slate-700">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pie de Tarjeta / Enlaces -->
+              <div class="px-6 py-4 bg-slate-50/70 border-t border-brand-border flex items-center justify-between">
+                <a
+                  href={`/proyectos/${project.slug}`}
+                  class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-blue hover:text-brand-blue-hover transition-colors"
+                >
+                  <span>Ver ficha técnica completa</span>
+                  <ArrowUpRight class="w-4 h-4" />
+                </a>
+
+                {project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="p-2 rounded-lg text-slate-500 hover:text-brand-navy hover:bg-slate-200/60 transition-colors"
+                    aria-label={`Ver repositorio de ${project.title} en GitHub`}
+                    title="Ver en GitHub"
+                  >
+                    <Github class="w-4 h-4" />
+                  </a>
+                )}
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <!-- Mensaje cuando un filtro no tiene elementos -->
+      <div id="no-projects-message" class="hidden text-center py-16">
+        <p class="text-slate-500 text-base">No se encontraron proyectos en esta categoría.</p>
+      </div>
+
+      <!-- Nota de transparencia sobre proyectos -->
+      <div class="mt-16 p-6 rounded-2xl bg-white border border-brand-border text-xs text-brand-muted max-w-3xl mx-auto text-center leading-relaxed">
+        <strong class="text-brand-navy font-semibold">Compromiso de autenticidad:</strong> Los proyectos presentados corresponden a desarrollos académicos verificables y proyectos demostrativos funcionales en desarrollo continuo. No se simulan clientes ficticios ni se alteran los resultados obtenidos.
+      </div>
+    </Container>
+  </section>
 </MainLayout>
+
+<!-- Script interactivo de filtrado -->
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('.project-card');
+  const emptyMsg = document.getElementById('no-projects-message');
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const selectedCategory = btn.getAttribute('data-filter') || 'Todos';
+
+      // Actualizar estilos activos de los botones
+      buttons.forEach((b) => {
+        b.classList.remove('bg-brand-navy', 'text-white', 'border-brand-navy', 'shadow-sm');
+        b.classList.add('bg-white', 'text-slate-700', 'border-brand-border');
+      });
+      btn.classList.remove('bg-white', 'text-slate-700', 'border-brand-border');
+      btn.classList.add('bg-brand-navy', 'text-white', 'border-brand-navy', 'shadow-sm');
+
+      // Filtrar tarjetas
+      let visibleCount = 0;
+      cards.forEach((card) => {
+        const cardCategory = card.getAttribute('data-category');
+        if (selectedCategory === 'Todos' || cardCategory === selectedCategory) {
+          card.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      if (emptyMsg) {
+        if (visibleCount === 0) {
+          emptyMsg.classList.remove('hidden');
+        } else {
+          emptyMsg.classList.add('hidden');
+        }
+      }
+    });
+  });
+</script>

@@ -1,133 +1,274 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
 import Container from '@/components/common/Container.astro';
-import SectionTitle from '@/components/common/SectionTitle.astro';
 import Badge from '@/components/common/Badge.astro';
+import Button from '@/components/common/Button.astro';
 import { EXPERIENCES, EDUCATION } from '@/data/experience';
 import { SKILL_CATEGORIES } from '@/data/skills';
-import { Briefcase, GraduationCap, CheckCircle2 } from 'lucide-astro';
+import {
+  Briefcase,
+  GraduationCap,
+  CheckCircle2,
+  Code2,
+  ArrowRight,
+  Sparkles,
+  Calendar,
+} from 'lucide-astro';
+
+const methodologySteps = [
+  {
+    step: '01',
+    title: 'Análisis de necesidades',
+    desc: 'Comprensión de requerimientos comerciales, objetivos del cliente y alcance del proyecto.',
+  },
+  {
+    step: '02',
+    title: 'Diseño y prototipado',
+    desc: 'Estructuración visual de wireframes y prototipos navegables antes de programar.',
+  },
+  {
+    step: '03',
+    title: 'Desarrollo e implementación',
+    desc: 'Construcción con código limpio, arquitectura desacoplada, accesibilidad y diseño responsive.',
+  },
+  {
+    step: '04',
+    title: 'Pruebas y entrega',
+    desc: 'Control de calidad riguroso, pruebas funcionales, despliegue y soporte continuo.',
+  },
+];
 ---
 
 <MainLayout
-  title="Sobre Mí | Trayectoria, Experiencia y Habilidades"
-  description="Conoce el perfil profesional de Dyer Mandujano: estudiante de Ingeniería de Sistemas Computacionales y desarrollador de soluciones digitales."
+  title="Sobre Mí | Perfil Profesional, Experiencia y Habilidades"
+  description="Conoce la trayectoria de Dyer Mandujano: estudiante de Ingeniería de Sistemas Computacionales, desarrollador de software y analista de soluciones digitales."
 >
-  <section class="py-16 sm:py-20">
-    <Container class="max-w-4xl">
-      <!-- Intro Profile -->
-      <SectionTitle
-        tag="Sobre Mí"
-        title="Detrás de cada solución digital hay una idea que merece hacerse realidad"
-        subtitle="Soy Dyer Mandujano, estudiante de Ingeniería de Sistemas Computacionales y desarrollador de soluciones digitales orientadas a emprendedores y empresas."
-        align="left"
-      />
+  <!-- Cabecera de Perfil -->
+  <section class="py-16 sm:py-24 bg-gradient-to-b from-white to-brand-bg border-b border-brand-border">
+    <Container class="max-w-5xl">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <!-- Avatar y Monograma -->
+        <div class="lg:col-span-4 flex justify-center lg:justify-start">
+          <div class="relative">
+            <div class="w-36 h-36 sm:w-44 sm:h-44 rounded-3xl bg-brand-navy text-white flex items-center justify-center font-extrabold text-5xl sm:text-6xl tracking-wider shadow-2xl border-4 border-white">
+              DM
+            </div>
+            <div class="absolute -bottom-3 -right-3 p-3 bg-brand-blue text-white rounded-2xl shadow-lg">
+              <Code2 class="w-6 h-6" />
+            </div>
+          </div>
+        </div>
 
-      <div class="prose max-w-none text-slate-600 mb-16 leading-relaxed space-y-4">
-        <p>
-          Tengo interés y experiencia práctica en desarrollo web, bases de datos, análisis de requerimientos, diseño de interfaces y soluciones tecnológicas orientadas a optimizar la gestión empresarial.
-        </p>
-        <p>
-          Durante mis prácticas preprofesionales en el área de Tecnologías de la Información de ONCOCARE S.A.C., participé activamente en el análisis de requerimientos, diseño de prototipos, desarrollo de consultas SQL, elaboración de dashboards en Power BI, pruebas funcionales y soporte tecnológico.
-        </p>
-        <p>
-          Mi objetivo es ayudar a negocios y profesionales a fortalecer su presencia digital mediante soluciones tecnológicas modernas, sólidas y eficientes.
-        </p>
+        <!-- Presentación y Título -->
+        <div class="lg:col-span-8 text-center lg:text-left space-y-4">
+          <Badge variant="blue" size="md">
+            <Sparkles class="w-3.5 h-3.5" />
+            <span>Perfil Profesional</span>
+          </Badge>
+
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-navy tracking-tight leading-tight">
+            Dyer Mandujano
+          </h1>
+
+          <p class="text-lg sm:text-xl font-semibold text-brand-blue">
+            Estudiante de Ingeniería de Sistemas Computacionales & Desarrollador Web
+          </p>
+
+          <p class="text-base text-brand-muted leading-relaxed max-w-2xl font-normal">
+            Apasionado por transformar requerimientos y problemas empresariales en soluciones tecnológicas funcionales, estructuradas y fáciles de usar.
+          </p>
+
+          <div class="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-4">
+            <Button href="/contacto" variant="primary" size="md">
+              <span>Hablemos de tu proyecto</span>
+              <ArrowRight class="w-4 h-4 ml-1.5" />
+            </Button>
+            <Button href="/proyectos" variant="outline" size="md">
+              <span>Explorar portafolio</span>
+            </Button>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Narrativa Profesional y Formación -->
+  <section class="py-16 sm:py-24 bg-brand-bg">
+    <Container class="max-w-5xl space-y-16">
+      <!-- Presentación Detallada -->
+      <div class="p-8 sm:p-12 bg-white border border-brand-border rounded-3xl shadow-card space-y-6">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-navy tracking-tight">
+          Detrás de cada solución digital hay una idea que merece hacerse realidad
+        </h2>
+
+        <div class="space-y-4 text-base text-slate-600 leading-relaxed font-normal">
+          <p>
+            Soy Dyer Mandujano, estudiante universitario de la carrera de Ingeniería de Sistemas Computacionales. Mi vocación profesional está orientada al diseño y desarrollo de soluciones web, administración y modelado de bases de datos relacionales, análisis de requerimientos funcionales y visualización analítica de datos.
+          </p>
+          <p>
+            Durante mi etapa formativa y práctica en el sector corporativo, he tenido la oportunidad de participar activamente en proyectos donde la tecnología cumple un rol transformador: desde simplificar procesos operativos y administrativos mediante herramientas web a medida, hasta construir tableros gerenciales en Power BI para la toma de decisiones basada en métricas.
+          </p>
+          <p>
+            Mi enfoque de trabajo combina disciplina técnica, comunicación constante y apego a las buenas prácticas de la industria, garantizando entregables limpios, escalables y con un impacto positivo directo en los negocios de mis clientes.
+          </p>
+        </div>
       </div>
 
-      <!-- Experiencia Profesional -->
-      <div class="mb-16">
-        <div class="flex items-center gap-3 mb-8">
-          <div class="p-2.5 rounded-lg bg-blue-50 text-brand-blue">
+      <!-- Experiencia Profesional en ONCOCARE S.A.C. -->
+      <div class="space-y-8">
+        <div class="flex items-center gap-3">
+          <div class="p-3 rounded-2xl bg-blue-50 text-brand-blue border border-blue-100">
             <Briefcase class="w-6 h-6" />
           </div>
           <div>
-            <h2 class="text-2xl font-bold text-brand-navy">Experiencia Práctica</h2>
-            <p class="text-sm text-brand-muted">Trayectoria en entorno empresarial</p>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-navy tracking-tight">
+              Experiencia Práctica Empresarial
+            </h2>
+            <p class="text-sm text-brand-muted">Trayectoria en entorno corporativo</p>
           </div>
         </div>
 
-        <div class="space-y-8">
-          {
-            EXPERIENCES.map((exp) => (
-              <div class="p-6 bg-white border border-brand-border rounded-xl shadow-subtle">
-                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-                  <h3 class="text-xl font-bold text-brand-navy">{exp.company}</h3>
-                  <Badge variant="blue">{exp.type}</Badge>
+        {
+          EXPERIENCES.map((exp) => (
+            <div class="p-8 sm:p-10 bg-white border border-brand-border rounded-3xl shadow-card space-y-6">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-brand-border">
+                <div>
+                  <span class="inline-block px-3 py-1 mb-2 text-xs font-semibold rounded-full bg-blue-50 text-brand-blue border border-blue-100">
+                    {exp.type}
+                  </span>
+                  <h3 class="text-2xl font-bold text-brand-navy">{exp.company}</h3>
+                  <p class="text-sm font-semibold text-slate-700 mt-1">
+                    {exp.role} • {exp.area}
+                  </p>
                 </div>
-                <p class="text-sm font-semibold text-brand-blue mb-4">
-                  {exp.role} • {exp.area}
-                </p>
-                <ul class="space-y-2 text-sm text-slate-600 mb-6">
-                  {exp.responsibilities.map((item) => (
-                    <li class="flex items-start gap-2.5">
-                      <CheckCircle2 class="w-4 h-4 text-brand-blue flex-shrink-0 mt-1" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div class="flex flex-wrap gap-1.5 pt-4 border-t border-brand-border">
-                  {exp.technologies.map((tech) => (
-                    <span class="px-2.5 py-1 text-xs bg-slate-100 text-slate-700 rounded-md font-medium">
-                      {tech}
-                    </span>
+                <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 bg-slate-100 px-3 py-1.5 rounded-lg self-start sm:self-auto">
+                  <Calendar class="w-4 h-4 text-brand-blue" />
+                  <span>{exp.period}</span>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="text-sm font-bold uppercase tracking-wider text-brand-navy mb-4">
+                  Actividades y responsabilidades desempeñadas:
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                  {exp.responsibilities.map((resp) => (
+                    <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100/80 text-xs sm:text-sm text-slate-700">
+                      <CheckCircle2 class="w-4 h-4 text-brand-blue flex-shrink-0 mt-0.5" />
+                      <span>{resp}</span>
+                    </div>
                   ))}
                 </div>
               </div>
-            ))
-          }
-        </div>
+
+              <div class="pt-6 border-t border-brand-border flex flex-wrap items-center gap-2">
+                <span class="text-xs font-bold text-brand-navy mr-2">Herramientas aplicadas:</span>
+                {exp.technologies.map((tech) => (
+                  <span class="px-3 py-1 text-xs font-semibold rounded-lg bg-slate-100 text-slate-700 border border-slate-200">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))
+        }
       </div>
 
       <!-- Formación Académica -->
-      <div class="mb-16">
-        <div class="flex items-center gap-3 mb-6">
-          <div class="p-2.5 rounded-lg bg-cyan-50 text-brand-cyan">
+      <div class="space-y-6">
+        <div class="flex items-center gap-3">
+          <div class="p-3 rounded-2xl bg-cyan-50 text-cyan-700 border border-cyan-100">
             <GraduationCap class="w-6 h-6" />
           </div>
           <div>
-            <h2 class="text-2xl font-bold text-brand-navy">Formación Académica</h2>
-            <p class="text-sm text-brand-muted">Educación universitaria</p>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-navy tracking-tight">
+              Formación Académica
+            </h2>
+            <p class="text-sm text-brand-muted">Educación y preparación continua</p>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 gap-4">
+        <div class="grid grid-cols-1 gap-6">
           {
             EDUCATION.map((edu) => (
-              <div class="p-6 bg-white border border-brand-border rounded-xl shadow-subtle">
-                <div class="flex items-center justify-between mb-2">
-                  <h3 class="text-lg font-bold text-brand-navy">{edu.degree}</h3>
+              <div class="p-8 bg-white border border-brand-border rounded-3xl shadow-card space-y-3">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <h3 class="text-xl font-bold text-brand-navy">{edu.degree}</h3>
                   <Badge variant="cyan">{edu.status}</Badge>
                 </div>
-                <p class="text-sm text-brand-muted mb-2">{edu.institution}</p>
-                {edu.details && <p class="text-sm text-slate-600">{edu.details}</p>}
+                <p class="text-sm font-semibold text-brand-blue">{edu.institution}</p>
+                {edu.details && (
+                  <p class="text-sm text-slate-600 leading-relaxed font-normal pt-2">
+                    {edu.details}
+                  </p>
+                )}
               </div>
             ))
           }
         </div>
       </div>
 
-      <!-- Habilidades -->
-      <div>
-        <h2 class="text-2xl font-bold text-brand-navy mb-6">Habilidades & Tecnologías</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Habilidades Técnicas y Herramientas -->
+      <div class="space-y-6">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-navy tracking-tight">
+          Habilidades Técnicas & Herramientas
+        </h2>
+        <p class="text-sm text-brand-muted">
+          Conocimientos y tecnologías aplicadas en desarrollo, persistencia y análisis de datos:
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {
             SKILL_CATEGORIES.map((cat) => (
-              <div class="p-5 bg-white border border-brand-border rounded-xl">
-                <h3 class="font-bold text-brand-navy text-base mb-1">{cat.title}</h3>
-                <p class="text-xs text-brand-muted mb-3">{cat.description}</p>
-                <div class="flex flex-wrap gap-1.5">
-                  {cat.skills.map((skill) => (
-                    <span
-                      class={`px-2.5 py-1 text-xs rounded-md font-medium ${
-                        skill.isRecent
-                          ? 'bg-blue-100 text-brand-blue border border-blue-200'
-                          : 'bg-slate-100 text-slate-700'
-                      }`}
-                    >
-                      {skill.name}
-                      {skill.isRecent && ' (Proyecto actual)'}
-                    </span>
-                  ))}
+              <div class="p-6 bg-white border border-brand-border rounded-2xl shadow-subtle flex flex-col justify-between">
+                <div>
+                  <h3 class="text-base font-bold text-brand-navy mb-1">{cat.title}</h3>
+                  <p class="text-xs text-brand-muted mb-4 font-normal">{cat.description}</p>
+                  <div class="flex flex-wrap gap-1.5">
+                    {cat.skills.map((skill) => (
+                      <span
+                        class={`px-2.5 py-1 text-xs rounded-md font-semibold ${
+                          skill.isRecent
+                            ? 'bg-blue-100 text-brand-blue border border-blue-200'
+                            : 'bg-slate-100 text-slate-700'
+                        }`}
+                      >
+                        {skill.name}
+                        {skill.isRecent && ' (Proyecto actual)'}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Metodología de Trabajo en 4 Etapas -->
+      <div class="p-8 sm:p-12 bg-white border border-brand-border rounded-3xl shadow-card space-y-8">
+        <div class="max-w-2xl">
+          <span class="text-xs font-bold uppercase tracking-wider text-brand-blue">
+            Proceso Profesional
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-navy tracking-tight mt-1">
+            Metodología de Trabajo
+          </h2>
+          <p class="text-sm text-brand-muted mt-2">
+            Cada solución se gestiona bajo un marco de trabajo de 4 etapas para asegurar orden, transparencia y entregas puntuales:
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {
+            methodologySteps.map((s) => (
+              <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 flex flex-col justify-between">
+                <span class="text-2xl font-mono font-extrabold text-brand-blue mb-3 block">
+                  {s.step}
+                </span>
+                <div>
+                  <h3 class="text-base font-bold text-brand-navy mb-2">{s.title}</h3>
+                  <p class="text-xs text-slate-600 leading-relaxed font-normal">{s.desc}</p>
                 </div>
               </div>
             ))

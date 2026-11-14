@@ -1,109 +1,190 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
 import Container from '@/components/common/Container.astro';
-import SectionTitle from '@/components/common/SectionTitle.astro';
+import Badge from '@/components/common/Badge.astro';
 import Button from '@/components/common/Button.astro';
-import { siteConfig } from '@/config/site';
-import { MessageCircle, Mail, Github, Linkedin, Send } from 'lucide-astro';
+import { siteConfig, formspreeConfig } from '@/config/site';
+import {
+  MessageCircle,
+  Mail,
+  Github,
+  Linkedin,
+  Send,
+  Sparkles,
+  Clock,
+  ShieldCheck,
+} from 'lucide-astro';
 ---
 
 <MainLayout
   title="Contacto | Solicita una Cotización para tu Proyecto"
-  description="Conversemos sobre tu proyecto web o solución digital. Solicita una cotización personalizada o contáctame directamente por WhatsApp o correo."
+  description="Conversemos sobre tu proyecto web o solución digital. Solicita una cotización detallada o comunícate directamente por WhatsApp o correo electrónico."
 >
-  <section class="py-16 sm:py-20">
-    <Container class="max-w-5xl">
-      <SectionTitle
-        tag="Hablemos"
-        title="¿Tienes un proyecto en mente? Hagámoslo realidad"
-        subtitle="Cuéntame qué necesitas y conversemos sobre cómo puedo ayudarte a alcanzar los objetivos de tu negocio."
-      />
+  <!-- Cabecera -->
+  <section class="py-16 sm:py-24 bg-gradient-to-b from-white to-brand-bg border-b border-brand-border">
+    <Container class="text-center max-w-4xl">
+      <Badge variant="blue" size="md" class="mb-4">
+        <Sparkles class="w-3.5 h-3.5" />
+        <span>Hablemos de tu Proyecto</span>
+      </Badge>
 
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 mt-12">
-        <!-- Canales directos -->
-        <div class="space-y-6">
-          <div class="p-6 bg-white border border-brand-border rounded-xl shadow-subtle space-y-4">
-            <h3 class="font-bold text-brand-navy text-lg">Canales Directos</h3>
-            <p class="text-sm text-brand-muted">
-              Si prefieres una respuesta más rápida, comunícate por cualquiera de estas vías:
+      <h1 class="text-3xl sm:text-5xl font-extrabold text-brand-navy tracking-tight leading-tight">
+        ¿Tienes una Idea en Mente? <br class="hidden sm:inline" />
+        <span class="text-brand-blue">Hagámosla Realidad</span>
+      </h1>
+
+      <p class="mt-6 text-base sm:text-lg text-brand-muted max-w-2xl mx-auto leading-relaxed">
+        Cuéntame qué necesita tu negocio o emprendimiento. Analizaré tu requerimiento y te responderé con una propuesta técnica y comercial clara en menos de 24 horas.
+      </p>
+    </Container>
+  </section>
+
+  <!-- Formulario y Canales Directos -->
+  <section class="py-16 sm:py-24 bg-brand-bg">
+    <Container class="max-w-6xl">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <!-- Canales Directos y Garantías (4 cols) -->
+        <div class="lg:col-span-5 space-y-6">
+          <!-- Tarjeta de Contacto Directo -->
+          <div class="p-8 bg-white border border-brand-border rounded-3xl shadow-card space-y-6">
+            <h2 class="text-xl font-bold text-brand-navy">Canales de Atención Directa</h2>
+            <p class="text-sm text-brand-muted leading-relaxed font-normal">
+              Si buscas una respuesta inmediata o prefieres una comunicación más ágil, comunícate a través de mis canales directos:
             </p>
 
             <div class="space-y-3 pt-2">
+              <!-- WhatsApp -->
               <a
                 href={siteConfig.social.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="flex items-center gap-3 p-3 rounded-lg bg-emerald-50 text-emerald-800 hover:bg-emerald-100 transition-colors text-sm font-medium"
+                class="flex items-center gap-3.5 p-4 rounded-2xl bg-emerald-50 border border-emerald-200/80 text-emerald-900 hover:bg-emerald-100 transition-colors group"
               >
-                <MessageCircle class="w-5 h-5 text-emerald-600 flex-shrink-0" />
-                <span>WhatsApp directo</span>
+                <div class="p-2.5 rounded-xl bg-emerald-500 text-white shadow-xs group-hover:scale-105 transition-transform">
+                  <MessageCircle class="w-5 h-5" />
+                </div>
+                <div>
+                  <span class="text-xs font-bold text-emerald-700 block uppercase tracking-wider">
+                    WhatsApp Directo
+                  </span>
+                  <span class="text-sm font-semibold text-emerald-950">
+                    Chatear con Dyer Mandujano
+                  </span>
+                </div>
               </a>
 
+              <!-- Correo -->
               <a
                 href={`mailto:${siteConfig.social.email}`}
-                class="flex items-center gap-3 p-3 rounded-lg bg-slate-50 text-slate-800 hover:bg-slate-100 transition-colors text-sm font-medium"
+                class="flex items-center gap-3.5 p-4 rounded-2xl bg-slate-50 border border-slate-200 text-slate-800 hover:bg-slate-100 transition-colors group"
               >
-                <Mail class="w-5 h-5 text-brand-blue flex-shrink-0" />
-                <span class="truncate">{siteConfig.social.email}</span>
+                <div class="p-2.5 rounded-xl bg-brand-blue text-white shadow-xs group-hover:scale-105 transition-transform">
+                  <Mail class="w-5 h-5" />
+                </div>
+                <div class="overflow-hidden">
+                  <span class="text-xs font-bold text-brand-blue block uppercase tracking-wider">
+                    Correo Electrónico
+                  </span>
+                  <span class="text-sm font-semibold text-slate-900 truncate block">
+                    {siteConfig.social.email}
+                  </span>
+                </div>
               </a>
 
-              <a
-                href={siteConfig.social.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex items-center gap-3 p-3 rounded-lg bg-slate-50 text-slate-800 hover:bg-slate-100 transition-colors text-sm font-medium"
-              >
-                <Linkedin class="w-5 h-5 text-sky-700 flex-shrink-0" />
-                <span>LinkedIn</span>
-              </a>
+              <!-- Redes Profesionales -->
+              <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-brand-muted">
+                <span class="font-semibold text-slate-700">Perfiles profesionales:</span>
+                <div class="flex items-center gap-2">
+                  <a
+                    href={siteConfig.social.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="p-2 rounded-lg bg-slate-100 text-slate-700 hover:text-brand-navy hover:bg-slate-200 transition-colors"
+                    title="GitHub"
+                    aria-label="Perfil de GitHub"
+                  >
+                    <Github class="w-4 h-4" />
+                  </a>
+                  <a
+                    href={siteConfig.social.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="p-2 rounded-lg bg-slate-100 text-slate-700 hover:text-brand-navy hover:bg-slate-200 transition-colors"
+                    title="LinkedIn"
+                    aria-label="Perfil de LinkedIn"
+                  >
+                    <Linkedin class="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
 
-              <a
-                href={siteConfig.social.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex items-center gap-3 p-3 rounded-lg bg-slate-50 text-slate-800 hover:bg-slate-100 transition-colors text-sm font-medium"
-              >
-                <Github class="w-5 h-5 text-slate-800 flex-shrink-0" />
-                <span>GitHub</span>
-              </a>
+          <!-- Compromisos del Servicio -->
+          <div class="p-6 bg-slate-50 border border-slate-200 rounded-3xl space-y-4 text-xs text-slate-600">
+            <div class="flex items-start gap-3">
+              <Clock class="w-4 h-4 text-brand-blue flex-shrink-0 mt-0.5" />
+              <span>
+                <strong class="text-brand-navy">Tiempo de respuesta:</strong> Habitualmente respondo en un lapso de 2 a 12 horas hábiles.
+              </span>
+            </div>
+            <div class="flex items-start gap-3">
+              <ShieldCheck class="w-4 h-4 text-brand-blue flex-shrink-0 mt-0.5" />
+              <span>
+                <strong class="text-brand-navy">Privacidad garantizada:</strong> Tus datos de contacto y la idea de tu proyecto se tratan con estricta confidencialidad.
+              </span>
             </div>
           </div>
         </div>
 
-        <!-- Formulario de contacto -->
-        <div class="lg:col-span-2">
-          <div class="p-8 bg-white border border-brand-border rounded-xl shadow-subtle">
-            <form id="contact-form" class="space-y-5">
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <!-- Formulario de Cotización (7 cols) -->
+        <div class="lg:col-span-7">
+          <div class="p-8 sm:p-10 bg-white border border-brand-border rounded-3xl shadow-card">
+            <h2 class="text-2xl font-bold text-brand-navy mb-2">Solicitud de Cotización</h2>
+            <p class="text-xs sm:text-sm text-brand-muted mb-8 font-normal">
+              Completa los datos de tu proyecto para recibir un presupuesto adaptado a tus objetivos.
+            </p>
+
+            <form
+              id="quote-form"
+              data-endpoint={formspreeConfig.endpoint}
+              class="space-y-6"
+              novalidate
+            >
+              <!-- Nombre y Negocio -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label for="name" class="block text-sm font-medium text-brand-navy mb-1.5">
-                    Nombre completo <span class="text-rose-500">*</span>
+                  <label for="name" class="block text-xs font-bold uppercase tracking-wider text-brand-navy mb-2">
+                    Tu nombre completo <span class="text-rose-500">*</span>
                   </label>
                   <input
                     type="text"
                     id="name"
                     name="name"
                     required
-                    placeholder="Ej. Juan Pérez"
-                    class="w-full px-4 py-2.5 rounded-lg border border-brand-border focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none text-sm transition-all"
+                    placeholder="Ej. Roberto Sánchez"
+                    class="w-full px-4 py-3 rounded-xl border border-brand-border text-sm focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none transition-all placeholder:text-slate-400 bg-white"
                   />
+                  <span class="error-msg text-xs text-rose-500 mt-1 hidden">Por favor ingresa tu nombre</span>
                 </div>
+
                 <div>
-                  <label for="business" class="block text-sm font-medium text-brand-navy mb-1.5">
-                    Nombre del negocio o empresa
+                  <label for="business" class="block text-xs font-bold uppercase tracking-wider text-brand-navy mb-2">
+                    Nombre del negocio <span class="text-slate-400 font-normal lowercase">(opcional)</span>
                   </label>
                   <input
                     type="text"
                     id="business"
                     name="business"
-                    placeholder="Ej. Mi Emprendimiento"
-                    class="w-full px-4 py-2.5 rounded-lg border border-brand-border focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none text-sm transition-all"
+                    placeholder="Ej. Distribuidora Lima"
+                    class="w-full px-4 py-3 rounded-xl border border-brand-border text-sm focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none transition-all placeholder:text-slate-400 bg-white"
                   />
                 </div>
               </div>
 
+              <!-- Correo -->
               <div>
-                <label for="email" class="block text-sm font-medium text-brand-navy mb-1.5">
+                <label for="email" class="block text-xs font-bold uppercase tracking-wider text-brand-navy mb-2">
                   Correo electrónico <span class="text-rose-500">*</span>
                 </label>
                 <input
@@ -111,72 +192,84 @@ import { MessageCircle, Mail, Github, Linkedin, Send } from 'lucide-astro';
                   id="email"
                   name="email"
                   required
-                  placeholder="tu@correo.com"
-                  class="w-full px-4 py-2.5 rounded-lg border border-brand-border focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none text-sm transition-all"
+                  placeholder="ejemplo@negocio.com"
+                  class="w-full px-4 py-3 rounded-xl border border-brand-border text-sm focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none transition-all placeholder:text-slate-400 bg-white"
                 />
+                <span class="error-msg text-xs text-rose-500 mt-1 hidden">Ingresa un correo electrónico válido</span>
               </div>
 
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <!-- Servicio y Presupuesto -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label for="service" class="block text-sm font-medium text-brand-navy mb-1.5">
-                    Tipo de servicio <span class="text-rose-500">*</span>
+                  <label for="service" class="block text-xs font-bold uppercase tracking-wider text-brand-navy mb-2">
+                    Servicio de interés <span class="text-rose-500">*</span>
                   </label>
                   <select
                     id="service"
                     name="service"
                     required
-                    class="w-full px-4 py-2.5 rounded-lg border border-brand-border focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none text-sm transition-all bg-white"
+                    class="w-full px-4 py-3 rounded-xl border border-brand-border text-sm focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none transition-all bg-white"
                   >
                     <option value="">Selecciona un servicio</option>
-                    <option value="desarrollo-web">Desarrollo de páginas web</option>
-                    <option value="landing-page">Landing Page</option>
-                    <option value="sistema-web">Sistema web personalizado</option>
-                    <option value="ecommerce">Tienda virtual / Catálogo digital</option>
-                    <option value="bi-analytics">Inteligencia de negocios (BI)</option>
-                    <option value="mantenimiento">Mantenimiento web</option>
-                    <option value="otro">Otro requerimiento</option>
+                    <option value="desarrollo-web">Desarrollo de páginas web empresariales</option>
+                    <option value="landing-pages">Landing pages</option>
+                    <option value="catalogos-ecommerce">Catálogos digitales y tiendas virtuales</option>
+                    <option value="sistemas-web">Sistemas web personalizados</option>
+                    <option value="business-intelligence">Inteligencia de negocios y dashboards</option>
+                    <option value="mantenimiento">Mantenimiento web y soporte tecnológico</option>
+                    <option value="otro">Otro requerimiento a medida</option>
                   </select>
+                  <span class="error-msg text-xs text-rose-500 mt-1 hidden">Selecciona un servicio</span>
                 </div>
+
                 <div>
-                  <label for="budget" class="block text-sm font-medium text-brand-navy mb-1.5">
-                    Presupuesto aproximado
+                  <label for="budget" class="block text-xs font-bold uppercase tracking-wider text-brand-navy mb-2">
+                    Presupuesto estimado <span class="text-slate-400 font-normal lowercase">(opcional)</span>
                   </label>
                   <select
                     id="budget"
                     name="budget"
-                    class="w-full px-4 py-2.5 rounded-lg border border-brand-border focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none text-sm transition-all bg-white"
+                    class="w-full px-4 py-3 rounded-xl border border-brand-border text-sm focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none transition-all bg-white"
                   >
-                    <option value="">A convenir / Por definir</option>
+                    <option value="">Por definir / A evaluar</option>
                     <option value="menos-1000">Menos de S/ 1,000</option>
-                    <option value="1000-2500">S/ 1,000 - S/ 2,500</option>
-                    <option value="2500-5000">S/ 2,500 - S/ 5,000</option>
+                    <option value="1000-2500">S/ 1,000 a S/ 2,500</option>
+                    <option value="2500-5000">S/ 2,500 a S/ 5,000</option>
                     <option value="mas-5000">Más de S/ 5,000</option>
                   </select>
                 </div>
               </div>
 
+              <!-- Descripción -->
               <div>
-                <label for="message" class="block text-sm font-medium text-brand-navy mb-1.5">
-                  Descripción del proyecto <span class="text-rose-500">*</span>
+                <label for="message" class="block text-xs font-bold uppercase tracking-wider text-brand-navy mb-2">
+                  Descripción del proyecto o requerimiento <span class="text-rose-500">*</span>
                 </label>
                 <textarea
                   id="message"
                   name="message"
                   rows="4"
                   required
-                  placeholder="Cuéntame sobre tu objetivo, funciones esperadas o dudas iniciales..."
-                  class="w-full px-4 py-2.5 rounded-lg border border-brand-border focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none text-sm transition-all resize-none"
+                  placeholder="Cuéntame sobre tu negocio, qué funcionalidades buscas implementar o cuál es el objetivo principal..."
+                  class="w-full px-4 py-3 rounded-xl border border-brand-border text-sm focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none transition-all resize-none placeholder:text-slate-400 bg-white"
                 ></textarea>
+                <span class="error-msg text-xs text-rose-500 mt-1 hidden">Por favor describe brevemente tu requerimiento (mínimo 10 caracteres)</span>
               </div>
 
-              <Button type="submit" variant="primary" class="w-full py-3">
+              <!-- Botón de Envío -->
+              <Button
+                type="submit"
+                variant="primary"
+                size="lg"
+                class="w-full py-4 text-base font-bold shadow-md shadow-blue-600/20"
+                id="submit-btn"
+              >
                 <span>Enviar solicitud de cotización</span>
                 <Send class="w-4 h-4 ml-2" />
               </Button>
 
-              <p class="text-xs text-brand-muted text-center pt-2">
-                Respondo habitualmente en menos de 24 horas hábiles. Tus datos no serán compartidos.
-              </p>
+              <!-- Mensaje de estado dinámico -->
+              <div id="form-status" class="hidden p-4 rounded-xl text-xs sm:text-sm font-medium"></div>
             </form>
           </div>
         </div>
@@ -184,3 +277,135 @@ import { MessageCircle, Mail, Github, Linkedin, Send } from 'lucide-astro';
     </Container>
   </section>
 </MainLayout>
+
+<!-- Script de Validación y Manejo del Formulario -->
+<script>
+  const form = document.getElementById('quote-form') as HTMLFormElement;
+  const statusDiv = document.getElementById('form-status') as HTMLDivElement;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const serviceSelect = document.getElementById('service') as HTMLSelectElement;
+
+  // Auto-seleccionar servicio si viene por parámetro en la URL (?servicio=slug)
+  const urlParams = new URLSearchParams(window.location.search);
+  const requestedService = urlParams.get('servicio');
+  if (requestedService && serviceSelect) {
+    for (let i = 0; i < serviceSelect.options.length; i++) {
+      if (serviceSelect.options[i].value === requestedService) {
+        serviceSelect.selectedIndex = i;
+        break;
+      }
+    }
+  }
+
+  // Validación y envío
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const nameInput = document.getElementById('name') as HTMLInputElement;
+    const emailInput = document.getElementById('email') as HTMLInputElement;
+    const messageInput = document.getElementById('message') as HTMLTextAreaElement;
+    const businessInput = document.getElementById('business') as HTMLInputElement;
+    const budgetSelect = document.getElementById('budget') as HTMLSelectElement;
+
+    // Reset de errores
+    form.querySelectorAll('.error-msg').forEach((el) => el.classList.add('hidden'));
+
+    let isValid = true;
+
+    if (!nameInput.value.trim()) {
+      nameInput.nextElementSibling?.classList.remove('hidden');
+      isValid = false;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailInput.value.trim())) {
+      emailInput.nextElementSibling?.classList.remove('hidden');
+      isValid = false;
+    }
+
+    if (!serviceSelect.value) {
+      serviceSelect.nextElementSibling?.classList.remove('hidden');
+      isValid = false;
+    }
+
+    if (messageInput.value.trim().length < 10) {
+      messageInput.nextElementSibling?.classList.remove('hidden');
+      isValid = false;
+    }
+
+    if (!isValid) return;
+
+    const endpoint = form.getAttribute('data-endpoint') || '';
+
+    // Si el endpoint es el placeholder por defecto, no simulamos un envío falso:
+    // Informamos honestamente y facilitamos enviar la solicitud directamente por WhatsApp.
+    if (endpoint.includes('placeholder_form_id')) {
+      statusDiv.className =
+        'p-5 rounded-2xl bg-amber-50 border border-amber-200 text-amber-950 text-xs sm:text-sm space-y-3';
+      statusDiv.innerHTML = `
+        <div class="flex items-start gap-2.5">
+          <span class="font-bold text-amber-900 block">Formulario listo para integración:</span>
+        </div>
+        <p class="leading-relaxed">
+          Para recibir envíos automáticos por correo, configura tu ID de formulario en <code>src/config/site.ts</code> (Formspree).
+        </p>
+        <p class="font-semibold text-slate-800">
+          ¿Deseas enviar tus datos inmediatamente por WhatsApp?
+        </p>
+        <a
+          href="https://wa.me/51999999999?text=${encodeURIComponent(
+            `Hola Dyer, soy ${nameInput.value.trim()}${
+              businessInput.value.trim() ? ` de ${businessInput.value.trim()}` : ''
+            }. Me interesa cotizar el servicio de ${serviceSelect.value}.${
+              budgetSelect.value ? ` Presupuesto: ${budgetSelect.value}.` : ''
+            } Mensaje: ${messageInput.value.trim()}`
+          )}"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-sm transition-colors"
+        >
+          Enviar cotización por WhatsApp &rarr;
+        </a>
+      `;
+      statusDiv.classList.remove('hidden');
+      return;
+    }
+
+    // Si el endpoint está configurado, enviar vía Formspree
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span>Enviando solicitud...</span>';
+
+    try {
+      const formData = new FormData(form);
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        body: formData,
+        headers: { Accept: 'application/json' },
+      });
+
+      if (res.ok) {
+        statusDiv.className =
+          'p-5 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-950 text-xs sm:text-sm';
+        statusDiv.innerHTML = `
+          <strong class="font-bold block mb-1">¡Solicitud enviada con éxito!</strong>
+          Gracias por contactarme, ${nameInput.value}. He recibido tu requerimiento y te responderé en breve.
+        `;
+        statusDiv.classList.remove('hidden');
+        form.reset();
+      } else {
+        throw new Error('Hubo un problema al procesar la solicitud');
+      }
+    } catch (err) {
+      statusDiv.className =
+        'p-5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-950 text-xs sm:text-sm';
+      statusDiv.innerHTML = `
+        <strong class="font-bold block mb-1">No se pudo enviar el formulario</strong>
+        Ocurrió un error al conectar con el servidor. Por favor comunícate directamente por WhatsApp o correo.
+      `;
+      statusDiv.classList.remove('hidden');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<span>Enviar solicitud de cotización</span>';
+    }
+  });
+</script>
