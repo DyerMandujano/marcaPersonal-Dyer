@@ -4,32 +4,41 @@ import Button from '@/components/common/Button.astro';
 import { X, ArrowRight } from 'lucide-astro';
 
 interface Props {
-  currentPath: string;
+  currentPath?: string;
 }
 
-const { currentPath } = Astro.props;
+const { currentPath = Astro.url.pathname } = Astro.props;
 ---
 
+<!-- Mobile Drawer Modal Root -->
 <div
   id="mobile-menu-drawer"
-  class="fixed inset-0 z-50 transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden"
+  class="fixed inset-0 z-50 lg:hidden pointer-events-none invisible transition-all duration-300"
   aria-modal="true"
   role="dialog"
+  aria-label="Menú de navegación móvil"
   aria-hidden="true"
 >
-  <!-- Backdrop -->
+  <!-- Backdrop con efecto fade-in / fade-out -->
   <div
     id="mobile-menu-backdrop"
-    class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm opacity-0 transition-opacity duration-300"
+    class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm opacity-0 transition-opacity duration-300 ease-in-out"
+    aria-hidden="true"
   ></div>
 
-  <!-- Panel -->
+  <!-- Panel lateral con efecto slide-in / slide-out -->
   <div
-    class="fixed inset-y-0 right-0 w-full max-w-xs bg-white shadow-2xl p-6 flex flex-col justify-between overflow-y-auto"
+    id="mobile-menu-panel"
+    class="fixed inset-y-0 right-0 w-full max-w-xs bg-white shadow-2xl flex flex-col justify-between overflow-y-auto transform translate-x-full transition-transform duration-300 ease-in-out z-10"
   >
+    <!-- Header del Menú Móvil -->
     <div>
-      <div class="flex items-center justify-between pb-6 border-b border-brand-border">
-        <a href="/" class="flex items-center gap-2.5 group">
+      <div class="flex items-center justify-between p-6 border-b border-brand-border">
+        <a
+          href="/"
+          class="flex items-center gap-2.5 group focus:outline-none focus:ring-2 focus:ring-brand-blue rounded-lg p-1"
+          aria-label="Dyer Mandujano - Inicio"
+        >
           <span
             class="flex items-center justify-center w-10 h-10 rounded-xl bg-brand-navy text-white font-extrabold text-sm tracking-wider"
           >
@@ -37,21 +46,21 @@ const { currentPath } = Astro.props;
           </span>
           <div class="flex flex-col">
             <span class="font-bold text-brand-navy text-base leading-tight">Dyer Mandujano</span>
-            <span class="text-xs text-brand-muted">Soluciones Digitales</span>
+            <span class="text-xs text-brand-muted font-medium">Soluciones Digitales</span>
           </div>
         </a>
         <button
           id="close-menu-btn"
           type="button"
-          class="p-2 rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-brand-blue"
-          aria-label="Cerrar menú"
+          class="p-2.5 rounded-xl text-slate-500 hover:text-brand-navy hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-brand-blue transition-colors"
+          aria-label="Cerrar menú de navegación"
         >
           <X class="w-6 h-6" />
         </button>
       </div>
 
-      <!-- Links -->
-      <nav class="mt-6 flex flex-col space-y-2">
+      <!-- Links de navegación -->
+      <nav class="p-6 flex flex-col space-y-2" aria-label="Enlaces móviles">
         {
           NAV_ITEMS.map((item) => {
             const isActive =
@@ -60,14 +69,15 @@ const { currentPath } = Astro.props;
             return (
               <a
                 href={item.href}
-                class={`px-4 py-3 rounded-lg text-base font-semibold transition-colors flex items-center justify-between ${
+                class={`px-4 py-3 rounded-xl text-base font-semibold transition-colors flex items-center justify-between ${
                   isActive
-                    ? 'bg-blue-50 text-brand-blue'
+                    ? 'bg-blue-50 text-brand-blue border border-blue-100'
                     : 'text-slate-700 hover:bg-slate-50 hover:text-brand-navy'
                 }`}
+                aria-current={isActive ? 'page' : undefined}
               >
                 <span>{item.title}</span>
-                <ArrowRight class="w-4 h-4 opacity-40" />
+                <ArrowRight class={`w-4 h-4 ${isActive ? 'text-brand-blue opacity-100' : 'opacity-40'}`} />
               </a>
             );
           })
@@ -75,9 +85,9 @@ const { currentPath } = Astro.props;
       </nav>
     </div>
 
-    <!-- CTA Button -->
-    <div class="pt-6 border-t border-brand-border">
-      <Button href="/contacto" variant="primary" class="w-full justify-center py-3">
+    <!-- CTA Button inferior -->
+    <div class="p-6 border-t border-brand-border bg-slate-50/60">
+      <Button href="/contacto" variant="primary" class="w-full justify-center py-3 shadow-sm">
         <span>Solicitar cotización</span>
         <ArrowRight class="w-4 h-4 ml-2" />
       </Button>
@@ -86,41 +96,92 @@ const { currentPath } = Astro.props;
 </div>
 
 <script>
-  const openBtn = document.getElementById('open-menu-btn');
-  const closeBtn = document.getElementById('close-menu-btn');
-  const drawer = document.getElementById('mobile-menu-drawer');
-  const backdrop = document.getElementById('mobile-menu-backdrop');
-  const links = drawer?.querySelectorAll('nav a');
+  function initMobileMenu() {
+    const openBtn = document.getElementById('open-menu-btn');
+    const closeBtn = document.getElementById('close-menu-btn');
+    const drawer = document.getElementById('mobile-menu-drawer');
+    const backdrop = document.getElementById('mobile-menu-backdrop');
+    const panel = document.getElementById('mobile-menu-panel');
+    const links = drawer?.querySelectorAll('nav a');
 
-  function openMenu() {
-    if (!drawer || !backdrop) return;
-    drawer.classList.remove('translate-x-full');
-    backdrop.classList.remove('opacity-0');
-    drawer.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('overflow-hidden');
-    closeBtn?.focus();
+    if (!openBtn || !closeBtn || !drawer || !backdrop || !panel) return;
+
+    const safeDrawer = drawer;
+    const safeBackdrop = backdrop;
+    const safePanel = panel;
+    const safeOpenBtn = openBtn;
+    const safeCloseBtn = closeBtn;
+
+    let isOpen = false;
+
+    function openMenu() {
+      if (isOpen) return;
+      isOpen = true;
+
+      // 1. Mostrar contenedor principal en el DOM visual
+      safeDrawer.classList.remove('invisible', 'pointer-events-none');
+      safeDrawer.setAttribute('aria-hidden', 'false');
+      safeOpenBtn.setAttribute('aria-expanded', 'true');
+
+      // 2. Animar en el siguiente frame para fluidez visual sin saltos
+      requestAnimationFrame(() => {
+        safeBackdrop.classList.remove('opacity-0');
+        safeBackdrop.classList.add('opacity-100');
+        safePanel.classList.remove('translate-x-full');
+      });
+
+      // 3. Prevenir scroll de fondo en móvil
+      document.body.classList.add('overflow-hidden');
+
+      // 4. Mover foco al botón de cierre sin provocar scroll horizontal
+      setTimeout(() => {
+        safeCloseBtn.focus({ preventScroll: true });
+      }, 50);
+    }
+
+    function closeMenu() {
+      if (!isOpen) return;
+      isOpen = false;
+
+      // 1. Animar salida fluida
+      safeBackdrop.classList.remove('opacity-100');
+      safeBackdrop.classList.add('opacity-0');
+      safePanel.classList.add('translate-x-full');
+      safeDrawer.setAttribute('aria-hidden', 'true');
+      safeOpenBtn.setAttribute('aria-expanded', 'false');
+
+      // 2. Restaurar scroll del body
+      document.body.classList.remove('overflow-hidden');
+
+      // 3. Devolver foco al botón de apertura sin scroll
+      safeOpenBtn.focus({ preventScroll: true });
+
+      // 4. Ocultar completamente tras concluir la transición CSS (300ms)
+      setTimeout(() => {
+        if (!isOpen) {
+          safeDrawer.classList.add('invisible', 'pointer-events-none');
+        }
+      }, 300);
+    }
+
+    safeOpenBtn.addEventListener('click', openMenu);
+    safeCloseBtn.addEventListener('click', closeMenu);
+    safeBackdrop.addEventListener('click', closeMenu);
+
+    // Cerrar al pulsar cualquier enlace
+    links?.forEach((link) => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    // Cerrar al presionar la tecla Escape
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen) {
+        closeMenu();
+      }
+    });
   }
 
-  function closeMenu() {
-    if (!drawer || !backdrop) return;
-    drawer.classList.add('translate-x-full');
-    backdrop.classList.add('opacity-0');
-    drawer.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('overflow-hidden');
-    openBtn?.focus();
-  }
-
-  openBtn?.addEventListener('click', openMenu);
-  closeBtn?.addEventListener('click', closeMenu);
-  backdrop?.addEventListener('click', closeMenu);
-
-  // Close menu when a navigation anchor is clicked
-  links?.forEach((link) => {
-    link.addEventListener('click', closeMenu);
-  });
-
-  // Close on ESC key
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeMenu();
-  });
+  // Inicializar menú
+  initMobileMenu();
+  document.addEventListener('astro:page-load', initMobileMenu);
 </script>

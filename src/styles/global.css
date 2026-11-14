@@ -23,6 +23,11 @@
     background-color: var(--color-bg);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+  }
+
+  body {
+    overflow-x: clip;
   }
 
   /* Accesibilidad: respeta estrictamente la preferencia de movimiento reducido */
